@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../assets/images/logo/logo-main.png">
+    <title>VERITAS — Our Investigative Services</title>
+    <meta name="description"
+        content="Comprehensive investigative services including corporate investigations, surveillance, digital forensics, background checks, and more.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body>
+    <div class="animated-bg"></div>
+    <div class="nav-overlay" id="nav-overlay"></div>
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="../index.html" class="navbar-brand"><img src="../assets/images/logo/logo-main.png"
+                    alt="Veritas Logo" class="brand-logo"> VERITAS</a>
+            <div class="nav-links" id="nav-links">
+                <button class="nav-back mobile-only" id="nav-back"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                <a href="../index.html">Home - 1</a>
+                <a href="home-v2.html">Home - 2</a>
+                <a href="services.html" class="active">Services</a>
+                <a href="case-request.html">Request Case</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <div class="nav-item-dropdown">
+                    <a href="dashboard.html" class="dropdown-toggle">Dashboard <i
+                            class="fa-solid fa-chevron-down"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="admin-cases.html">Admin</a>
+                        <a href="dashboard.html">User</a>
+                    </div>
+                </div>
+
+                <hr class="mobile-only">
+                <a href="login.html" class="btn btn-outline nav-login-btn mobile-only">Login</a>
+            </div>
+
+            <div class="nav-actions">
+                <a href="login.html" class="btn btn-primary nav-login-btn desktop-only">Login</a>
+
+                <div class="nav-controls">
+                    <button class="rtl-toggle" id="rtl-toggle" aria-label="Toggle RTL">
+                        <i class="fa-solid fa-language"></i>
+                    </button>
+                    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                        <i class="fa-solid fa-sun"></i>
+                    </button>
+                    <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="nav-overlay" id="nav-overlay"></div>
+
+    <section class="page-header services-header">
+        <div class="container">
+            <h1>Our Services</h1>
+            <p>Comprehensive investigative solutions tailored to protect your interests, uncover the truth, and deliver
+                actionable results.</p>
+        </div>
+    </section>
+
+    <section id="services-list">
+        <div class="container">
+
+            <div class="service-filters" data-aos="fade-up" style="margin-bottom: 3rem;">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="corporate">Corporate</button>
+                <button class="filter-btn" data-filter="personal">Personal</button>
+                <button class="filter-btn" data-filter="digital">Digital</button>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card" data-category="corporate" data-aos="fade-up" data-aos-delay="0">
+                    <div class="service-icon"><i class="fa-solid fa-building"></i></div>
+                    <h3>Corporate Investigations</h3>
+                    <p>Internal fraud detection, employee misconduct, intellectual property theft, and corporate
+                        espionage. We protect your business from within.</p>
+                    <a href="case-request.html" class="service-link">Request Investigation</a>
+                </div>
+                <div class="service-card" data-category="digital" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-icon"><i class="fa-solid fa-video"></i></div>
+                    <h3>Surveillance Operations</h3>
+                    <p>Covert physical and electronic surveillance utilizing state-of-the-art equipment and experienced
+                        field operatives for discreet monitoring.</p>
+                    <a href="case-request.html" class="service-link">Request Investigation</a>
+                </div>
+                <div class="service-card" data-category="digital" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-icon"><i class="fa-solid fa-laptop-code"></i></div>
+                    <h3>Digital Forensics</h3>
+                    <p>Computer, mobile device, and network forensic analysis. Data recovery, email tracing, and social
+                        media investigation.</p>
+                    <a href="case-request.html" class="service-link">Request Investigation</a>
+                </div>
+                <div class="service-card" data-category="personal" data-aos="fade-up" data-aos-delay="0">
+                    <div class="service-icon"><i class="fa-solid fa-user-check"></i></div>
+                    <h3>Background Checks</h3>
+                    <p>Comprehensive personal, employment, and financial background screening for individuals, partners,
+                        and potential hires.</p>
+                    <a href="case-request.html" class="service-link">Request Investigation</a>
+                </div>
+                <div class="service-card" data-category="corporate" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-icon"><i class="fa-solid fa-magnifying-glass-dollar"></i></div>
+                    <h3>Fraud Investigation</h3>
+                    <p>Insurance fraud, workers' compensation fraud, financial fraud, and identity theft investigations
+                        with forensic accounting support.</p>
+                    <a href="case-request.html" class="service-link">Request Investigation</a>
+                </div>
+                <div class="service-card" data-category="personal" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-icon"><i class="fa-solid fa-person-circle-question"></i></div>
+                    <h3>Missing Persons</h3>
+                    <p>Skip tracing, missing person location, and reconnection services leveraging advanced databases
+                        and global networks.</p>
+                    <a href="case-request.html" class="service-link">Request Investigation</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== WHY CLIENTS CHOOSE VERITAS ===== -->
+    <section class="trust-section"
+        style="border-top: 1px solid rgba(255, 255, 255, 0.06); background: radial-gradient(circle at center, rgba(138, 99, 246, 0.08), transparent);">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="label">Trust</span>
+                <h2>Why Clients Choose Veritas</h2>
+            </div>
+            <div class="trust-grid">
+                <div class="trust-card" data-aos="fade-up">
+                    <i class="fa-solid fa-user-tie"></i>
+                    <h4>Experienced Investigators</h4>
+                    <p>Our team includes specialists with backgrounds in law enforcement, cyber investigations, and
+                        intelligence analysis.</p>
+                </div>
+                <div class="trust-card" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fa-solid fa-microchip"></i>
+                    <h4>Advanced Technology</h4>
+                    <p>We combine human expertise with modern surveillance and digital forensic tools.</p>
+                </div>
+                <div class="trust-card" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fa-solid fa-gavel"></i>
+                    <h4>Legal & Ethical Compliance</h4>
+                    <p>Every investigation follows strict legal standards to ensure admissible evidence.</p>
+                </div>
+                <div class="trust-card" data-aos="fade-up" data-aos-delay="300">
+                    <i class="fa-solid fa-lock"></i>
+                    <h4>Complete Confidentiality</h4>
+                    <p>Client identity and case information remain strictly protected.</p>
+                </div>
+                <div class="trust-card" data-aos="fade-up" data-aos-delay="400">
+                    <i class="fa-solid fa-globe"></i>
+                    <h4>Global Intelligence Network</h4>
+                    <p>Access to international databases, intelligence networks, and investigative partnerships.</p>
+                </div>
+                <div class="trust-card" data-aos="fade-up" data-aos-delay="500">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <h4>Evidence Integrity</h4>
+                    <p>All collected evidence is documented, verified, and preserved following strict chain-of-custody
+                        procedures.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== HOW OUR INVESTIGATIONS WORK ===== -->
+    <section class="process-section"
+        style="border-top: 1px solid rgba(255, 255, 255, 0.06); background: radial-gradient(circle at center, rgba(138, 99, 246, 0.08), transparent);">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="label">Process</span>
+                <h2>How Our Investigations Work</h2>
+                <p>A structured approach ensuring accurate, lawful, and confidential results.</p>
+            </div>
+            <div class="process-timeline">
+                <div class="process-step" data-aos="fade-right">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Case Assessment</h4>
+                        <p>We evaluate your situation, objectives, and available information to design the investigation
+                            plan.</p>
+                    </div>
+                </div>
+                <div class="process-step" data-aos="fade-right" data-aos-delay="100">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Intelligence Gathering</h4>
+                        <p>Our investigators collect digital and field intelligence through legal and ethical methods.
+                        </p>
+                    </div>
+                </div>
+                <div class="process-step" data-aos="fade-right" data-aos-delay="200">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Evidence Verification</h4>
+                        <p>All findings are verified, documented, and analyzed by specialists.</p>
+                    </div>
+                </div>
+                <div class="process-step" data-aos="fade-right" data-aos-delay="300">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Confidential Reporting</h4>
+                        <p>Clients receive clear reports with evidence, insights, and recommended actions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== WHEN CLIENTS TYPICALLY CONTACT US ===== -->
+    <section class="problems-section"
+        style="border-top: 1px solid rgba(255, 255, 255, 0.06); background: radial-gradient(circle at center, rgba(138, 99, 246, 0.08), transparent);">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="label">Scenarios</span>
+                <h2>When Clients Typically Contact Us</h2>
+            </div>
+            <div class="problems-grid">
+                <div class="problem-card" data-aos="fade-up">
+                    <h4>Corporate Suspicion</h4>
+                    <p>When internal fraud, data leaks, or employee misconduct is suspected.</p>
+                </div>
+                <div class="problem-card" data-aos="fade-up" data-aos-delay="100">
+                    <h4>Background Verification</h4>
+                    <p>Before hiring senior employees, business partners, or investors.</p>
+                </div>
+                <div class="problem-card" data-aos="fade-up" data-aos-delay="200">
+                    <h4>Insurance Fraud</h4>
+                    <p>When suspicious claims or staged incidents need investigation.</p>
+                </div>
+                <div class="problem-card" data-aos="fade-up" data-aos-delay="300">
+                    <h4>Missing Persons</h4>
+                    <p>When a family member or individual cannot be located through conventional means.</p>
+                </div>
+                <div class="problem-card" data-aos="fade-up" data-aos-delay="400">
+                    <h4>Legal Preparation</h4>
+                    <p>When attorneys need evidence or witness location before litigation.</p>
+                </div>
+                <div class="problem-card" data-aos="fade-up" data-aos-delay="500">
+                    <h4>Digital Evidence Recovery</h4>
+                    <p>When critical information must be recovered from devices, cloud systems, or compromised accounts.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONSULTATION (NEW CTA) ===== -->
+    <section class="consultation-cta"
+        style="border-top: 1px solid rgba(255, 255, 255, 0.06); background: radial-gradient(circle at center, rgba(138, 99, 246, 0.08), transparent);">
+        <div class="container">
+            <div class="consultation-box" data-aos="zoom-in">
+                <h2>Speak with an Investigator</h2>
+                <p>Our specialists are available to evaluate your situation and recommend the appropriate investigative
+                    approach.</p>
+                <div class="consultation-actions">
+                    <a href="case-request.html" class="btn btn-primary">
+                        <i class="fa-solid fa-file-shield"></i> Request Case
+                    </a>
+                    <a href="contact.html" class="btn btn-outline">
+                        <i class="fa-solid fa-calendar"></i> Schedule Consultation
+                    </a>
+                    <a href="login.html" class="btn btn-outline">
+                        <i class="fa-solid fa-lock"></i> Client Portal
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column"><a href="../index.html" class="navbar-brand" style="margin-bottom: 8px;"><img
+                            src="../assets/images/logo/logo-main.png" alt="Veritas Logo" class="brand-logo"> VERITAS</a>
+                    <p class="footer-brand-desc">Intelligence Behind the Truth. Premier private investigation agency
+                        delivering confidential, results-driven solutions.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Home - 1</a></li>
+                        <li><a href="home-v2.html">Home - 2</a></li>
+                        <li><a href="case-request.html">Request Case</a></li>
+                        <li><a href="404.html">404 Error</a></li>
+                        <li><a href="coming-soon.html">Coming Soon</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="services.html">Our Services</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="admin-cases.html">Admin Dashboard</a></li>
+                        <li><a href="dashboard.html">User Dashboard</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Security Updates</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 16px;">Advanced
+                        investigative intelligence delivered with absolute precision and confidentiality.</p>
+                    <form class="newsletter-form" id="newsletter-form"><input type="email"
+                            placeholder="Your email address" required><button type="submit">Subscribe</button></form>
+                    <p
+                        style="color: var(--accent-gold); font-size: 0.75rem; margin-top: 15px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">
+                        Trusted by Global Intelligence Professionals</p>
+                </div>
+            </div>
+            <div class="footer-bottom"><span>&copy; 2026 Veritas Investigations. All rights reserved.</span>
+                <div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a
+                        href="#">Confidentiality</a></div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>AOS.init({ duration: 800, once: true, offset: 100 });</script>
+    <script src="../assets/js/script.js"></script>
+    <script>
+        // Category Filtering
+        document.addEventListener('DOMContentLoaded', () => {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const serviceCards = document.querySelectorAll('.service-card');
+
+            if (filterBtns.length > 0) {
+                filterBtns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        // Remove active class
+                        filterBtns.forEach(b => b.classList.remove('active'));
+                        // Add active class
+                        btn.classList.add('active');
+
+                        const filter = btn.getAttribute('data-filter');
+
+                        serviceCards.forEach(card => {
+                            if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                                card.style.display = 'block';
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        });
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

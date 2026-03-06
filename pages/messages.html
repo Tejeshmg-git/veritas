@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../assets/images/logo/logo-main.png">
+    <title>VERITAS — Secure Messages</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .sidebar-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .sidebar-user {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .sidebar-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .sidebar-user-info h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .sidebar-user-info p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .sidebar-section {
+            padding: 16px 16px 8px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .messages-container {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            height: calc(100vh - var(--navbar-height) - 96px);
+        }
+
+        .msg-unread {
+            background: var(--accent-gold-soft);
+        }
+
+        .msg-badge {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-gold);
+            margin-left: auto;
+            flex-shrink: 0;
+        }
+
+        .chat-header h3 {
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .chat-header p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .chat-time {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+            text-align: right;
+        }
+
+        .chat-time.left {
+            text-align: left;
+        }
+
+        .mobile-sidebar-toggle {
+            display: none;
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 1050;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            color: #fff;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 20px rgba(201, 168, 76, 0.4);
+        }
+
+        @media (max-width: 828px) {
+            .mobile-sidebar-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .messages-container {
+                height: auto !important;
+                overflow: visible !important;
+                border: none !important;
+                background: transparent !important;
+                margin-bottom: 30px;
+            }
+
+            .messages-layout {
+                height: auto !important;
+                display: block !important;
+                background: transparent !important;
+            }
+
+            .message-item {
+                background: var(--bg-card) !important;
+                border: 1px solid var(--glass-border) !important;
+                border-radius: var(--border-radius) !important;
+                margin-bottom: 12px !important;
+                padding: 20px !important;
+            }
+
+            .chat-area {
+                height: 100vh !important;
+                top: 0 !important;
+                z-index: 2000 !important;
+            }
+
+            .chat-header {
+                padding: 16px 20px !important;
+                height: 70px !important;
+            }
+
+            .chat-messages {
+                padding: 20px !important;
+                height: calc(100vh - 140px) !important;
+            }
+
+            .chat-input {
+                padding: 15px !important;
+                height: 70px !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="animated-bg"></div>
+    <nav class="navbar dash-header" id="navbar">
+        <div class="container">
+            <a href="../index.html" class="navbar-brand"><img src="../assets/images/logo/logo-main.png"
+                    alt="Veritas Logo" class="brand-logo"> VERITAS</a>
+
+            <div class="nav-actions">
+                <div class="nav-controls">
+                    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                        <i class="fa-solid fa-sun"></i>
+                    </button>
+                    <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="nav-overlay" id="nav-overlay"></div>
+
+    <div class="sidebar-overlay"></div>
+    <div class="dashboard-layout">
+        <aside class="dashboard-sidebar" id="dashboard-sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-user">
+                    <div class="sidebar-avatar">JM</div>
+                    <div class="sidebar-user-info">
+                        <h4>James Mitchell</h4>
+                        <p>Client #VR-2847</p>
+                    </div>
+                    <button class="sidebar-close" onclick="closeSidebar()"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            </div>
+            <div class="sidebar-section">Navigation</div>
+            <div class="sidebar-menu">
+                <a href="dashboard.html" class="sidebar-item"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+                <a href="case-details.html" class="sidebar-item"><i class="fa-solid fa-folder-open"></i> Case
+                    Details</a>
+                <a href="messages.html" class="sidebar-item active"><i class="fa-solid fa-comments"></i> Messages</a>
+                <a href="documents.html" class="sidebar-item"><i class="fa-solid fa-file-shield"></i> Documents</a>
+            </div>
+            <div class="sidebar-section">Account</div>
+            <div class="sidebar-menu">
+                <a href="javascript:history.back()" class="sidebar-item"><i class="fa-solid fa-arrow-left"></i> Back</a>
+                <a href="login.html" class="sidebar-item"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            </div>
+        </aside>
+
+        <main class="dashboard-main">
+            <div class="admin-header" data-aos="fade-up">
+                <h1 style="font-family: var(--font-display); font-size: 1.6rem;">Secure Messages</h1>
+                <div class="confidential-badge"><i class="fa-solid fa-lock"></i> Encrypted</div>
+            </div>
+
+            <div class="messages-container" data-aos="fade-up">
+                <div class="messages-layout">
+                    <div class="messages-list">
+                        <div class="message-item active msg-unread" onclick="openChat()">
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <h4>Agent R. Hayes</h4>
+                                <div class="msg-badge"></div>
+                            </div>
+                            <p>Re: Financial records follow-up — we've found additional...</p>
+                            <div class="msg-time">2 hours ago</div>
+                        </div>
+                        <div class="message-item msg-unread" onclick="openChat()">
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <h4>Agent M. Rivera</h4>
+                                <div class="msg-badge"></div>
+                            </div>
+                            <p>Digital forensics update: recovered 47 deleted emails...</p>
+                            <div class="msg-time">5 hours ago</div>
+                        </div>
+                        <div class="message-item" onclick="openChat()">
+                            <h4>Case Coordinator</h4>
+                            <p>Your case VR-2847-B background check has been...</p>
+                            <div class="msg-time">Yesterday</div>
+                        </div>
+                        <div class="message-item"
+                            onclick="document.querySelector('.chat-area').classList.add('active')">
+                            <h4>Agent R. Hayes</h4>
+                            <p>Initial surveillance report is ready for your review...</p>
+                            <div class="msg-time">3 days ago</div>
+                        </div>
+                        <div class="message-item"
+                            onclick="document.querySelector('.chat-area').classList.add('active')">
+                            <h4>System Notification</h4>
+                            <p>Welcome to the Veritas secure messaging portal...</p>
+                            <div class="msg-time">Jan 15</div>
+                        </div>
+                    </div>
+
+                    <div class="chat-area">
+                        <div class="chat-header">
+                            <button class="mobile-only" onclick="closeChat()"
+                                style="background: none; border: none; color: var(--text-muted); padding: 5px; margin-right: 15px; font-size: 1.1rem;"><i
+                                    class="fa-solid fa-arrow-left"></i></button>
+                            <div class="sidebar-avatar" style="width: 36px; height: 36px; font-size: 0.8rem;">RH</div>
+                            <div>
+                                <h3>Agent R. Hayes</h3>
+                                <p>Lead Investigator • Online</p>
+                            </div>
+                        </div>
+                        <div class="chat-messages" id="chat-messages">
+                            <div class="chat-bubble received">Good morning, Mr. Mitchell. I wanted to follow up on the
+                                financial records we discussed during our last consultation.</div>
+                            <div class="chat-time left">10:15 AM</div>
+                            <div class="chat-bubble sent">Good morning, Agent Hayes. Yes, I've gathered the additional
+                                bank statements you requested.</div>
+                            <div class="chat-time">10:22 AM</div>
+                            <div class="chat-bubble received">Excellent. Please upload them through the Documents portal
+                                so our forensic accounting team can begin analysis immediately. We've found additional
+                                suspicious transactions that correlate with the patterns we identified earlier.</div>
+                            <div class="chat-time left">10:28 AM</div>
+                            <div class="chat-bubble sent">I'll upload them right away. Is there anything else you need
+                                from me at this stage?</div>
+                            <div class="chat-time">10:35 AM</div>
+                            <div class="chat-bubble received">That should be sufficient for now. I'll have a preliminary
+                                analysis ready within 48 hours. In the meantime, please review the latest surveillance
+                                report I uploaded to your case file.</div>
+                            <div class="chat-time left">10:40 AM</div>
+                        </div>
+                        <div class="chat-input">
+                            <input type="text" id="chat-input" placeholder="Type your secure message..."
+                                onkeypress="if(event.key==='Enter')sendMessage()">
+                            <button onclick="sendMessage()"><i class="fa-solid fa-paper-plane"></i> Send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <button class="mobile-sidebar-toggle" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true });
+
+        function openChat() {
+            const chatArea = document.querySelector('.chat-area');
+            chatArea.classList.add('active');
+            if (window.innerWidth <= 828) {
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeChat() {
+            const chatArea = document.querySelector('.chat-area');
+            chatArea.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const container = document.getElementById('chat-messages');
+            if (!input.value.trim()) return;
+
+            const msg = document.createElement('div');
+            msg.className = 'chat-bubble sent';
+            msg.textContent = input.value;
+            container.appendChild(msg);
+
+            const time = document.createElement('div');
+            time.className = 'chat-time';
+            time.textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            container.appendChild(time);
+
+            input.value = '';
+            container.scrollTop = container.scrollHeight;
+        }
+    </script>
+    <script src="../assets/js/script.js"></script>
+</body>
+
+</html>

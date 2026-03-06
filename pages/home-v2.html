@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../assets/images/logo/logo-main.png">
+    <title>VERITAS — Home V2 | Secure Intelligence Solutions</title>
+    <meta name="description"
+        content="Veritas delivers secure, technology-driven investigative solutions. Our operations center combines AI analytics with field expertise.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .hero-cinematic {
+            background: var(--hero-overlay), url('../assets/images/hero/hero-home2.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .case-studies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 28px;
+        }
+
+        .case-study-card {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .case-study-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--accent-gold);
+        }
+
+        .case-study-content {
+            padding: 28px;
+        }
+
+        .case-study-tag {
+            display: inline-block;
+            padding: 5px 15px;
+            background: var(--accent-gold-soft);
+            color: var(--accent-gold);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius-pill);
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .case-study-content h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .case-study-content p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+        }
+
+        .case-study-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            color: var(--text-muted);
+            font-size: 0.82rem;
+            margin-top: 20px;
+        }
+
+        .case-study-meta span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        .capabilities-section {
+            background: var(--bg-secondary);
+        }
+
+        .capabilities-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .capability-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius-lg);
+            transition: var(--transition);
+        }
+
+        .capability-item:hover {
+            border-color: var(--accent-gold);
+            transform: translateX(5px);
+        }
+
+        .capability-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            flex-shrink: 0;
+            background: var(--accent-gold-soft);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-gold);
+            font-size: 1.2rem;
+        }
+
+        .capability-item h4 {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .capability-item p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .partner-logos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 48px;
+            align-items: center;
+            opacity: 0.5;
+        }
+
+        .partner-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 768px) {
+            .capabilities-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .case-studies-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ---- Methodology Timeline ---- */
+        .methodology-section {
+            background: linear-gradient(180deg, var(--bg-primary), var(--bg-secondary));
+            padding: 100px 0;
+        }
+
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            position: relative;
+            margin-top: 60px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 12.5%;
+            width: 75%;
+            height: 2px;
+            background: var(--glass-border);
+            z-index: 1;
+        }
+
+        .timeline-step {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .step-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--bg-secondary);
+            border: 2px solid var(--accent-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            font-size: 1.8rem;
+            color: var(--accent-gold);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.15);
+            transition: var(--transition-spring);
+        }
+
+        .timeline-step:hover .step-icon {
+            transform: scale(1.1);
+            background: var(--accent-gold);
+            color: #0E0A1F;
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.3);
+        }
+
+        .timeline-step h4 {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: var(--accent-gold);
+        }
+
+        .timeline-step p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ---- Industries Grid ---- */
+        .industries-section {
+            background: var(--bg-secondary);
+            padding: 100px 0;
+        }
+
+        .industries-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .industry-card {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius-lg);
+            padding: 40px;
+            transition: var(--transition-spring);
+            text-align: center;
+        }
+
+        .industry-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-cyan);
+            background: rgba(138, 99, 246, 0.03);
+        }
+
+        .industry-card i {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .industry-card h4 {
+            font-family: var(--font-display);
+            font-size: 1.35rem;
+            margin-bottom: 15px;
+        }
+
+        .industry-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* ---- Ethics Section ---- */
+        .ethics-section {
+            background: linear-gradient(180deg, var(--bg-secondary), var(--bg-primary));
+            padding: 100px 0;
+        }
+
+        .ethics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .ethics-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius-lg);
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition-spring);
+        }
+
+        .ethics-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-gold);
+            background: rgba(212, 175, 55, 0.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .ethics-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent-gradient);
+        }
+
+        .ethics-card h4 {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.25rem;
+            margin-bottom: 20px;
+        }
+
+        .ethics-card h4 i {
+            color: var(--accent-gold);
+        }
+
+        .ethics-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 992px) {
+            .timeline {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .timeline::before {
+                display: none;
+            }
+
+            .industries-grid,
+            .ethics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .timeline,
+            .industries-grid,
+            .ethics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ---- Home V2 Unique CTA ---- */
+        .cta-v2 {
+            background: linear-gradient(135deg, #0E0A1F 0%, #1B1236 100%);
+            padding: 120px 0;
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .cta-v2::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(138, 99, 246, 0.05) 0%, transparent 70%);
+            z-index: 1;
+        }
+
+        .cta-v2-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-v2-content h2 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            line-height: 1.1;
+            margin-bottom: 24px;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .cta-v2-content p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        .secure-protocols {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 48px;
+        }
+
+        .protocol-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .protocol-item i {
+            color: var(--accent-gold);
+            font-size: 1rem;
+        }
+
+        .cta-v2-content .hero-buttons {
+            justify-content: flex-start;
+        }
+
+        .cta-v2-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .secure-ring {
+            width: 300px;
+            height: 300px;
+            border: 2px dashed rgba(212, 175, 55, 0.2);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            animation: rotate-slow 20s linear infinite;
+        }
+
+        .secure-ring::before {
+            content: '';
+            position: absolute;
+            inset: -20px;
+            border: 1px solid rgba(138, 99, 246, 0.1);
+            border-radius: 50%;
+            animation: rotate-slow 15s linear reverse infinite;
+        }
+
+        .secure-core {
+            width: 180px;
+            height: 180px;
+            background: var(--bg-card);
+            border: 1px solid var(--accent-gold);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.1);
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+
+        .secure-core i {
+            font-size: 3rem;
+            color: var(--accent-gold);
+            margin-bottom: 10px;
+        }
+
+        .secure-core span {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+        }
+
+        @keyframes rotate-slow {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes pulse-glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 30px rgba(212, 175, 55, 0.1);
+            }
+
+            50% {
+                box-shadow: 0 0 60px rgba(212, 175, 55, 0.2);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .cta-v2-grid {
+                padding: 0 20px;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .cta-v2 {
+                padding: 80px 0;
+            }
+
+            .cta-v2-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 50px;
+            }
+
+            .cta-v2-content p {
+                margin: 0 auto 40px auto;
+            }
+
+            .secure-protocols {
+                display: inline-flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+                max-width: 100%;
+                margin: 0 auto 40px auto;
+                text-align: left;
+            }
+
+            .cta-v2-content .hero-buttons {
+                justify-content: center;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .secure-protocols {
+                width: auto;
+                padding: 0 10px;
+            }
+
+            .cta-v2-content .hero-buttons {
+                flex-direction: column;
+                gap: 16px;
+                width: 100%;
+            }
+
+            .cta-v2-content .hero-buttons .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .secure-ring {
+                width: 240px;
+                height: 240px;
+            }
+
+            .secure-core {
+                width: 140px;
+                height: 140px;
+            }
+
+            .secure-core i {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="animated-bg"></div>
+    <div class="nav-overlay" id="nav-overlay"></div>
+
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="../index.html" class="navbar-brand">
+                <img src="../assets/images/logo/logo-main.png" alt="Veritas Logo" class="brand-logo">
+                VERITAS
+            </a>
+            <div class="nav-links" id="nav-links">
+                <button class="nav-back mobile-only" id="nav-back"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                <a href="../index.html">Home - 1</a>
+                <a href="home-v2.html" class="active">Home - 2</a>
+                <a href="services.html">Services</a>
+                <a href="case-request.html">Request Case</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <div class="nav-item-dropdown">
+                    <a href="dashboard.html" class="dropdown-toggle">Dashboard <i
+                            class="fa-solid fa-chevron-down"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="admin-cases.html">Admin</a>
+                        <a href="dashboard.html">User</a>
+                    </div>
+                </div>
+
+                <hr class="mobile-only">
+                <a href="login.html" class="btn btn-outline nav-login-btn mobile-only">Login</a>
+            </div>
+
+            <div class="nav-actions">
+                <a href="login.html" class="btn btn-primary nav-login-btn desktop-only">Login</a>
+
+                <div class="nav-controls">
+                    <button class="rtl-toggle" id="rtl-toggle" aria-label="Toggle RTL">
+                        <i class="fa-solid fa-language"></i>
+                    </button>
+                    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                        <i class="fa-solid fa-sun"></i>
+                    </button>
+                    <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="nav-overlay" id="nav-overlay"></div>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero-cinematic" id="hero">
+        <div class="hero-content">
+            <h1>VERITAS</h1>
+            <p class="tagline">Secure Intelligence Operations</p>
+            <p class="hero-desc">Where advanced technology meets investigative expertise. Our operations center
+                monitors, analyzes, and delivers actionable intelligence.</p>
+            <div class="hero-buttons">
+                <a href="login.html" class="btn btn-primary"><i class="fa-solid fa-lock"></i> Client Portal</a>
+                <a href="about.html" class="btn btn-outline"><i class="fa-solid fa-book-open"></i> Read Story</a>
+            </div>
+        </div>
+        <div class="scroll-indicator"><span>Scroll</span><i class="fa-solid fa-chevron-down"></i></div>
+    </section>
+
+    <!-- ===== CAPABILITIES ===== -->
+    <section class="capabilities-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="label">Capabilities</span>
+                <h2>Intelligence-Driven Solutions</h2>
+                <p>Our multi-disciplinary approach combines human expertise with technological innovation.</p>
+            </div>
+            <div class="capabilities-grid">
+                <div class="capability-item" data-aos="fade-up" data-aos-delay="0">
+                    <div class="capability-icon"><i class="fa-solid fa-satellite-dish"></i></div>
+                    <div>
+                        <h4>Surveillance Operations</h4>
+                        <p>Covert physical and electronic surveillance with real-time reporting through our secure
+                            portal.</p>
+                    </div>
+                </div>
+                <div class="capability-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="capability-icon"><i class="fa-solid fa-database"></i></div>
+                    <div>
+                        <h4>Open Source Intelligence</h4>
+                        <p>Deep-web analysis and public records investigation using AI-powered data aggregation tools.
+                        </p>
+                    </div>
+                </div>
+                <div class="capability-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="capability-icon"><i class="fa-solid fa-fingerprint"></i></div>
+                    <div>
+                        <h4>Digital Forensics</h4>
+                        <p>Recovery and analysis of digital evidence from devices, networks, and cloud services.</p>
+                    </div>
+                </div>
+                <div class="capability-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="capability-icon"><i class="fa-solid fa-building-shield"></i></div>
+                    <div>
+                        <h4>Corporate Security</h4>
+                        <p>Internal investigations, due diligence, and executive protection services for enterprises.
+                        </p>
+                    </div>
+                </div>
+                <div class="capability-item" data-aos="fade-up" data-aos-delay="400">
+                    <div class="capability-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+                    <div>
+                        <h4>Fraud Detection</h4>
+                        <p>Insurance, financial, and identity fraud investigations with forensic accounting support.</p>
+                    </div>
+                </div>
+                <div class="capability-item" data-aos="fade-up" data-aos-delay="500">
+                    <div class="capability-icon"><i class="fa-solid fa-gavel"></i></div>
+                    <div>
+                        <h4>Litigation Support</h4>
+                        <p>Evidence gathering, witness location, and expert testimony services for legal proceedings.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== INVESTIGATION METHODOLOGY ===== -->
+    <section class="methodology-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="label">Methodology</span>
+                <h2>Our Investigation Methodology</h2>
+                <p>A structured approach combining human intelligence, digital analysis, and field operations.</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-step" data-aos="fade-up" data-aos-delay="0">
+                    <div class="step-icon"><i class="fa-solid fa-microscope"></i></div>
+                    <h4>Intelligence Gathering</h4>
+                    <p>Collect initial data through open sources, background records, and digital footprints.</p>
+                </div>
+                <div class="timeline-step" data-aos="fade-up" data-aos-delay="100">
+                    <div class="step-icon"><i class="fa-solid fa-gears"></i></div>
+                    <h4>Strategic Analysis</h4>
+                    <p>Investigators analyze patterns and anomalies to form investigation hypotheses.</p>
+                </div>
+                <div class="timeline-step" data-aos="fade-up" data-aos-delay="200">
+                    <div class="step-icon"><i class="fa-solid fa-binoculars"></i></div>
+                    <h4>Field Operations</h4>
+                    <p>Surveillance, interviews, and on-site investigation to validate evidence.</p>
+                </div>
+                <div class="timeline-step" data-aos="fade-up" data-aos-delay="300">
+                    <div class="step-icon"><i class="fa-solid fa-file-shield"></i></div>
+                    <h4>Evidence Documentation</h4>
+                    <p>All findings are verified, documented, and prepared for legal or corporate use.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CASE STUDIES ===== -->
+    <section id="case-studies">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="label">Case Studies</span>
+                <h2>Proven Results</h2>
+                <p>Anonymized examples of successfully resolved investigations.</p>
+            </div>
+            <div class="case-studies-grid">
+                <div class="case-study-card" data-aos="fade-up" data-aos-delay="0">
+                    <div class="case-study-content">
+                        <span class="case-study-tag">Corporate Fraud</span>
+                        <h3>$2.3M Embezzlement Uncovered</h3>
+                        <p>A multinational corporation suspected internal financial irregularities. Our digital
+                            forensics team traced a complex web of shell companies and forged invoices.</p>
+                        <div class="case-study-meta"><span><i class="fa-solid fa-clock"></i> 6 weeks</span><span><i
+                                    class="fa-solid fa-check-circle"></i> Successfully prosecuted</span></div>
+                    </div>
+                </div>
+                <div class="case-study-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="case-study-content">
+                        <span class="case-study-tag">Insurance Fraud</span>
+                        <h3>Staged Accident Ring Dismantled</h3>
+                        <p>Surveillance and data analysis revealed a network of individuals orchestrating fraudulent
+                            insurance claims across three states.</p>
+                        <div class="case-study-meta"><span><i class="fa-solid fa-clock"></i> 3 months</span><span><i
+                                    class="fa-solid fa-check-circle"></i> 12 arrests made</span></div>
+                    </div>
+                </div>
+                <div class="case-study-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="case-study-content">
+                        <span class="case-study-tag">Missing Person</span>
+                        <h3>International Locate & Recovery</h3>
+                        <p>Through our global network and advanced OSINT techniques, we located a missing individual who
+                            had been unreachable for over two years.</p>
+                        <div class="case-study-meta"><span><i class="fa-solid fa-clock"></i> 4 weeks</span><span><i
+                                    class="fa-solid fa-check-circle"></i> Subject located</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== INDUSTRIES WE SERVE ===== -->
+    <section class="industries-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="label">Expertise</span>
+                <h2>Industries We Support</h2>
+                <p>Our investigative services support organizations across multiple sectors with specialized expertise.
+                </p>
+            </div>
+            <div class="industries-grid">
+                <div class="industry-card" data-aos="fade-up" data-aos-delay="0">
+                    <i class="fa-solid fa-building-columns"></i>
+                    <h4>Financial Institutions</h4>
+                    <p>Investigations involving fraud, asset tracing, and compliance monitoring.</p>
+                </div>
+                <div class="industry-card" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fa-solid fa-building-shield"></i>
+                    <h4>Corporate Enterprises</h4>
+                    <p>Internal investigations, due diligence, and risk assessments.</p>
+                </div>
+                <div class="industry-card" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fa-solid fa-car-burst"></i>
+                    <h4>Insurance Companies</h4>
+                    <p>Claim verification, accident investigations, and fraud detection.</p>
+                </div>
+                <div class="industry-card" data-aos="fade-up" data-aos-delay="300">
+                    <i class="fa-solid fa-scale-balanced"></i>
+                    <h4>Law Firms</h4>
+                    <p>Evidence collection, witness location, and litigation support.</p>
+                </div>
+                <div class="industry-card" data-aos="fade-up" data-aos-delay="400">
+                    <i class="fa-solid fa-user-shield"></i>
+                    <h4>Private Clients</h4>
+                    <p>Background checks, missing persons, and personal investigations.</p>
+                </div>
+                <div class="industry-card" data-aos="fade-up" data-aos-delay="500">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <h4>Gov & Compliance</h4>
+                    <p>Investigative intelligence for regulatory and compliance matters.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ETHICAL STANDARDS ===== -->
+    <section class="ethics-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="label">Trust</span>
+                <h2>Ethical Standards & Confidentiality</h2>
+                <p>Every investigation is conducted with strict adherence to legal frameworks and ethical guidelines.
+                </p>
+            </div>
+            <div class="ethics-grid">
+                <div class="ethics-card" data-aos="fade-right">
+                    <h4><i class="fa-solid fa-lock"></i> Client Confidentiality</h4>
+                    <p>All client information, documents, and communications are protected using secure systems and
+                        strict privacy protocols.</p>
+                </div>
+                <div class="ethics-card" data-aos="fade-up">
+                    <h4><i class="fa-solid fa-gavel"></i> Legal Compliance</h4>
+                    <p>Our investigators operate within applicable legal frameworks, ensuring that all evidence
+                        collected is admissible.</p>
+                </div>
+                <div class="ethics-card" data-aos="fade-left">
+                    <h4><i class="fa-solid fa-shield-halved"></i> Evidence Integrity</h4>
+                    <p>Evidence is handled using documented procedures to preserve authenticity and maintain a verified
+                        chain of custody.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA V2 ===== -->
+    <section class="cta-v2">
+        <div class="container">
+            <div class="cta-v2-grid">
+                <div class="cta-v2-content" data-aos="fade-right">
+                    <h2>Initiate Secure Investigation</h2>
+                    <p>Our intelligence operations center is active 24/7. Connect with our senior investigators through
+                        encrypted channels to discuss your requirements.</p>
+
+                    <div class="secure-protocols">
+                        <div class="protocol-item"><i class="fa-solid fa-shield-halved"></i> AES-256 Encrypted</div>
+                        <div class="protocol-item"><i class="fa-solid fa-user-secret"></i> 100% Confidential</div>
+                        <div class="protocol-item"><i class="fa-solid fa-file-contract"></i> Legal Compliance</div>
+                        <div class="protocol-item"><i class="fa-solid fa-headset"></i> Senior Consultation</div>
+                    </div>
+
+                    <div class="hero-buttons">
+                        <a href="case-request.html" class="btn btn-primary"><i class="fa-solid fa-file-shield"></i>
+                            Start Secure Case</a>
+                        <a href="contact.html" class="btn btn-outline"><i class="fa-solid fa-calendar"></i> Schedule
+                            Consultation</a>
+                    </div>
+                </div>
+
+                <div class="cta-v2-visual" data-aos="fade-left">
+                    <div class="secure-ring">
+                        <div class="secure-core">
+                            <i class="fa-solid fa-fingerprint"></i>
+                            <span>Authorized</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <a href="../index.html" class="navbar-brand" style="margin-bottom: 8px;"><img
+                            src="../assets/images/logo/logo-main.png" alt="Veritas Logo" class="brand-logo"> VERITAS</a>
+                    <p class="footer-brand-desc">Intelligence Behind the Truth. Premier private investigation agency
+                        delivering confidential, results-driven solutions.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Home - 1</a></li>
+                        <li><a href="home-v2.html">Home - 2</a></li>
+                        <li><a href="case-request.html">Request Case</a></li>
+                        <li><a href="404.html">404 Error</a></li>
+                        <li><a href="coming-soon.html">Coming Soon</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="services.html">Our Services</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="admin-cases.html">Admin Dashboard</a></li>
+                        <li><a href="dashboard.html">User Dashboard</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Security Updates</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 16px;">Advanced
+                        investigative intelligence delivered with absolute precision and confidentiality.</p>
+                    <form class="newsletter-form" id="newsletter-form"><input type="email"
+                            placeholder="Your email address" required><button type="submit">Subscribe</button></form>
+                    <p
+                        style="color: var(--accent-gold); font-size: 0.75rem; margin-top: 15px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">
+                        Trusted by Global Intelligence Professionals</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2026 Veritas Investigations. All rights reserved.</span>
+                <div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a
+                        href="#">Confidentiality</a></div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>AOS.init({ duration: 800, once: true, offset: 100 });</script>
+    <script src="../assets/js/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../assets/images/logo/logo-main.png">
+    <title>Coming Soon | VERITAS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .coming-soon-page {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .cs-content {
+            z-index: 10;
+            max-width: 800px;
+        }
+
+        .cs-brand {
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            text-decoration: none;
+        }
+
+        .cs-brand h2 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            letter-spacing: 5px;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0;
+        }
+
+        .cs-title {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 800;
+            font-family: var(--font-display);
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .cs-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 80px;
+        }
+
+        .countdown-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            font-family: var(--font-display);
+        }
+
+        .countdown-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-top: 5px;
+        }
+
+        .notify-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            padding: 8px;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+        }
+
+        .notify-form input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 0 25px;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        .notify-form input:focus {
+            outline: none;
+        }
+
+        .notify-form button {
+            padding: 12px 30px;
+        }
+
+        @media (max-width: 600px) {
+            .countdown-container {
+                gap: 15px;
+            }
+
+            .countdown-value {
+                font-size: 1.8rem;
+            }
+
+            .notify-form {
+                flex-direction: column;
+                background: transparent;
+                border: none;
+                padding: 0;
+                border-radius: 0;
+            }
+
+            .notify-form input {
+                background: rgba(255, 255, 255, 0.03);
+                border: 1px solid var(--glass-border);
+                border-radius: 50px;
+                padding: 15px 25px;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="animated-bg"></div>
+
+    <main class="coming-soon-page">
+        <div class="cs-content" data-aos="fade-up">
+            <a href="../index.html" class="cs-brand">
+                <img src="../assets/images/logo/logo-main.png" alt="Veritas Logo" style="width: 50px;">
+                <h2>VERITAS</h2>
+            </a>
+
+            <h1 class="cs-title">Intelligence in Progress</h1>
+            <p class="cs-subtitle">
+                We are currently deploying advanced investigative modules and secure client interfaces. Something
+                extraordinary is being forged in the shadows of Veritas.
+            </p>
+
+            <div class="countdown-container">
+                <div class="countdown-item">
+                    <span class="countdown-value">12</span>
+                    <span class="countdown-label">Days</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value">08</span>
+                    <span class="countdown-label">Hours</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value">45</span>
+                    <span class="countdown-label">Mins</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value">22</span>
+                    <span class="countdown-label">Secs</span>
+                </div>
+            </div>
+
+            <form class="notify-form">
+                <input type="email" placeholder="Enter your email for deployment alerts" required>
+                <button type="submit" class="btn btn-primary">Notify Me</button>
+            </form>
+
+            <div style="margin-top: 40px;">
+                <a href="../index.html" style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem;">
+                    <i class="fa-solid fa-arrow-left"></i> Return to Main Headquarters
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Simple countdown logic (purely visual for now)
+        function updateCountdown() {
+            const values = document.querySelectorAll('.countdown-value');
+            values.forEach(v => {
+                let current = parseInt(v.innerText);
+                if (Math.random() > 0.95) { // Slow simulation
+                    v.innerText = (current - 1).toString().padStart(2, '0');
+                }
+            });
+        }
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+
+</html>

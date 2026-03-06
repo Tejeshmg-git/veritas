@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../assets/images/logo/logo-main.png">
+    <title>VERITAS — Client Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .sidebar-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .sidebar-user {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .sidebar-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .sidebar-user-info h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .sidebar-user-info p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .sidebar-section {
+            padding: 16px 16px 8px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .activity-feed {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius-lg);
+            transition: var(--transition);
+        }
+
+        .activity-item:hover {
+            border-color: var(--accent-gold);
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .activity-icon.update {
+            background: rgba(0, 180, 216, 0.15);
+            color: var(--accent-cyan);
+        }
+
+        .activity-icon.doc {
+            background: var(--accent-gold-soft);
+            color: var(--accent-gold);
+        }
+
+        .activity-icon.msg {
+            background: rgba(34, 197, 94, 0.15);
+            color: #22C55E;
+        }
+
+        .activity-info h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .activity-info p {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        .dashboard-grid-2col {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 28px;
+        }
+
+        .dash-card {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius-lg);
+        }
+
+        .dash-card-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dash-card-header h3 {
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .dash-card-body {
+            padding: 24px;
+        }
+
+        .mobile-sidebar-toggle {
+            display: none;
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 1050;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            color: #fff;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 20px rgba(201, 168, 76, 0.4);
+        }
+
+        @media (max-width: 828px) {
+            .mobile-sidebar-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .dashboard-grid-2col {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .dash-card {
+                margin-bottom: 20px;
+            }
+
+            .admin-header h1 {
+                font-size: 1.8rem !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="animated-bg"></div>
+    <nav class="navbar dash-header" id="navbar">
+        <div class="container">
+            <a href="../index.html" class="navbar-brand"><img src="../assets/images/logo/logo-main.png"
+                    alt="Veritas Logo" class="brand-logo"> VERITAS</a>
+
+            <div class="nav-actions">
+                <div class="nav-controls">
+                    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                        <i class="fa-solid fa-sun"></i>
+                    </button>
+                    <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="sidebar-overlay"></div>
+    <div class="dashboard-layout">
+        <aside class="dashboard-sidebar" id="dashboard-sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-user">
+                    <div class="sidebar-avatar">JM</div>
+                    <div class="sidebar-user-info">
+                        <h4>James Mitchell</h4>
+                        <p>Client #VR-2847</p>
+                    </div>
+                    <button class="sidebar-close" onclick="closeSidebar()"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            </div>
+            <div class="sidebar-section">Navigation</div>
+            <div class="sidebar-menu">
+                <a href="dashboard.html" class="sidebar-item active"><i class="fa-solid fa-gauge-high"></i>
+                    Dashboard</a>
+                <a href="case-details.html" class="sidebar-item"><i class="fa-solid fa-folder-open"></i> Case
+                    Details</a>
+                <a href="messages.html" class="sidebar-item"><i class="fa-solid fa-comments"></i> Messages</a>
+                <a href="documents.html" class="sidebar-item"><i class="fa-solid fa-file-shield"></i> Documents</a>
+            </div>
+            <div class="sidebar-section">Account</div>
+            <div class="sidebar-menu">
+                <a href="javascript:history.back()" class="sidebar-item"><i class="fa-solid fa-arrow-left"></i> Back</a>
+                <a href="login.html" class="sidebar-item"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            </div>
+        </aside>
+
+        <main class="dashboard-main">
+            <div class="admin-header" data-aos="fade-up">
+                <div>
+                    <h1>Welcome back, James</h1>
+                    <p style="color: var(--text-secondary); font-size: 0.95rem;">Here's an overview of your active cases
+                        and recent activity.</p>
+                </div>
+                <div class="confidential-badge"><i class="fa-solid fa-lock"></i> Confidential</div>
+            </div>
+
+            <!-- Stats -->
+            <div class="dash-stats" data-aos="fade-up">
+                <div class="dash-stat-card">
+                    <div class="dash-stat-label">Active Cases</div>
+                    <div class="dash-stat-value">3</div>
+                    <div class="dash-stat-change"><i class="fa-solid fa-arrow-up"></i> 1 new this month</div>
+                </div>
+                <div class="dash-stat-card">
+                    <div class="dash-stat-label">Pending Updates</div>
+                    <div class="dash-stat-value">5</div>
+                    <div class="dash-stat-change"><i class="fa-solid fa-clock"></i> Last update 2h ago</div>
+                </div>
+                <div class="dash-stat-card">
+                    <div class="dash-stat-label">Documents</div>
+                    <div class="dash-stat-value">12</div>
+                    <div class="dash-stat-change"><i class="fa-solid fa-file"></i> 3 new this week</div>
+                </div>
+                <div class="dash-stat-card">
+                    <div class="dash-stat-label">Unread Messages</div>
+                    <div class="dash-stat-value">2</div>
+                    <div class="dash-stat-change"><i class="fa-solid fa-envelope"></i> From investigator</div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid-2col" data-aos="fade-up">
+                <!-- Active Cases Table -->
+                <div class="dash-card">
+                    <div class="dash-card-header">
+                        <h3>Active Cases</h3><a href="case-details.html" class="btn btn-small btn-outline">View All</a>
+                    </div>
+                    <div class="dash-table-wrapper">
+                        <table class="dash-table">
+                            <thead>
+                                <tr>
+                                    <th>Case ID</th>
+                                    <th>Type</th>
+                                    <th>Status</th>
+                                    <th>Updated</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td data-label="Case ID"><strong>VR-2847-A</strong></td>
+                                    <td data-label="Type">Corporate Fraud</td>
+                                    <td data-label="Status"><span class="status-badge active">Active</span></td>
+                                    <td data-label="Updated">2 hours ago</td>
+                                </tr>
+                                <tr>
+                                    <td data-label="Case ID"><strong>VR-2847-B</strong></td>
+                                    <td data-label="Type">Background Check</td>
+                                    <td data-label="Status"><span class="status-badge pending">Pending</span></td>
+                                    <td data-label="Updated">1 day ago</td>
+                                </tr>
+                                <tr>
+                                    <td data-label="Case ID"><strong>VR-2847-C</strong></td>
+                                    <td data-label="Type">Digital Forensics</td>
+                                    <td data-label="Status"><span class="status-badge active">Active</span></td>
+                                    <td data-label="Updated">3 days ago</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="dash-card">
+                    <div class="dash-card-header">
+                        <h3>Recent Activity</h3>
+                    </div>
+                    <div class="dash-card-body">
+                        <div class="activity-feed">
+                            <div class="activity-item">
+                                <div class="activity-icon update"><i class="fa-solid fa-file-lines"></i></div>
+                                <div class="activity-info">
+                                    <h4>Case VR-2847-A updated</h4>
+                                    <p>New surveillance report uploaded — 2 hours ago</p>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon msg"><i class="fa-solid fa-comment"></i></div>
+                                <div class="activity-info">
+                                    <h4>Message from Investigator</h4>
+                                    <p>Re: Follow-up on financial records — 5 hours ago</p>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon doc"><i class="fa-solid fa-file-pdf"></i></div>
+                                <div class="activity-info">
+                                    <h4>Document available</h4>
+                                    <p>Background check report ready for download — 1 day ago</p>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon update"><i class="fa-solid fa-shield-check"></i></div>
+                                <div class="activity-info">
+                                    <h4>Case VR-2847-C opened</h4>
+                                    <p>Digital forensics investigation initiated — 3 days ago</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <button class="mobile-sidebar-toggle" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>AOS.init({ duration: 800, once: true });</script>
+    <script src="../assets/js/script.js"></script>
+</body>
+
+</html>

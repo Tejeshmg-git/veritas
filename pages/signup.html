@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../assets/images/logo/logo-main.png">
+    <title>Join VERITAS — Secure Client Registration</title>
+    <meta name="description"
+        content="Register for a secure Veritas client account. Access case tracking, secure messaging, and confidential document management.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body>
+    <div class="animated-bg"></div>
+
+    <a href="../index.html" class="back-to-home"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+
+    <div class="login-page">
+        <div class="login-container" data-aos="zoom-in">
+            <div class="login-header">
+                <a href="../index.html" class="brand-name">
+                    <img src="../assets/images/logo/logo-main.png" alt="Veritas Logo" class="brand-logo">
+                    <h1>VERITAS</h1>
+                </a>
+                <p>Register Secure Account</p>
+                <div class="secure-indicator">
+                    <i class="fa-solid fa-lock"></i> 256-bit SSL Encrypted
+                </div>
+            </div>
+
+            <form class="login-form" id="signup-form">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                    <div class="form-group">
+                        <label for="firstname">First Name</label>
+                        <input type="text" id="firstname" placeholder="James" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname">Last Name</label>
+                        <input type="text" id="lastname" placeholder="Mitchell" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="your@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Create Password</label>
+                    <input type="password" id="password" placeholder="••••••••" required>
+                </div>
+
+                <div class="form-group" style="margin-top: 10px; margin-bottom: 30px;">
+                    <label class="terms-container">
+                        <input type="checkbox" required>
+                        <span class="terms-text">I have read and agree to the <a href="coming-soon.html"
+                                style="color: var(--accent-gold); font-weight: 600;">Terms of Intelligence</a> and
+                            Privacy Protocol.</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; height: 52px; font-size: 1.05rem;">
+                    <i class="fa-solid fa-shield-halved"></i> Initializing Secure Account
+                </button>
+
+                <div class="login-divider">
+                    <span></span>
+                    <span class="divider-text">Or Register With</span>
+                    <span></span>
+                </div>
+
+                <div class="social-login-group">
+                    <button type="button" class="btn-social">
+                        <i class="fa-brands fa-google"></i> Google Identity
+                    </button>
+                    <button type="button" class="btn-social">
+                        <i class="fa-brands fa-apple"></i> Apple ID
+                    </button>
+                </div>
+            </form>
+
+            <div class="login-footer">
+                <p>Already have an account? <a href="login.html" style="font-weight: 600;">Log In</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+    </script>
+    <script src="../assets/js/script.js"></script>
+</body>
+
+</html>

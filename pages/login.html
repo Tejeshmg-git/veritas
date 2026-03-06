@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../assets/images/logo/logo-main.png">
+    <title>VERITAS — Secure Client Portal Login</title>
+    <meta name="description"
+        content="Access your secure Veritas client portal. Monitor case progress, communicate with investigators, and manage documents.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body>
+    <div class="animated-bg"></div>
+
+    <a href="../index.html" class="back-to-home"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+
+    <div class="login-page">
+        <div class="login-container" data-aos="zoom-in">
+            <div class="login-header">
+                <a href="../index.html" class="brand-name">
+                    <img src="../assets/images/logo/logo-main.png" alt="Veritas Logo" class="brand-logo">
+                    <h1>VERITAS</h1>
+                </a>
+                <p>Secure Client Portal</p>
+                <div class="secure-indicator">
+                    <i class="fa-solid fa-lock"></i> 256-bit SSL Encrypted
+                </div>
+            </div>
+
+            <form class="login-form" id="login-form">
+                <div class="form-group"><label for="email">Email Address</label><input type="email" id="email"
+                        placeholder="your@email.com" required></div>
+                <div class="form-group"><label for="password">Password</label><input type="password" id="password"
+                        placeholder="••••••••" required></div>
+                <div class="form-options">
+                    <label class="remember-me"><input type="checkbox"> Remember me</label>
+                    <a href="#" class="forgot-password">Forgot password?</a>
+                </div>
+                <button type="submit" class="btn btn-primary login-btn" style="height: 52px; font-size: 1.05rem;">
+                    <i class="fa-solid fa-right-to-bracket"></i> Sign In to Portal
+                </button>
+
+                <div class="login-divider">
+                    <span></span>
+                    <span class="divider-text">Or Secure Access With</span>
+                    <span></span>
+                </div>
+
+                <div class="social-login-group">
+                    <button type="button" class="btn-social">
+                        <i class="fa-brands fa-google"></i> Google Identity
+                    </button>
+                    <button type="button" class="btn-social">
+                        <i class="fa-brands fa-apple"></i> Apple ID
+                    </button>
+                </div>
+
+                <button type="button" class="btn btn-outline"
+                    style="width: 100%; margin-top: 15px; border-style: dashed; border-width: 1.5px;">
+                    <i class="fa-solid fa-key"></i> Two-Factor Authorization
+                </button>
+            </form>
+
+            <div class="login-footer">
+                <p>New to Veritas? <a href="signup.html">Create a secure account</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>AOS.init({ duration: 800, once: true });</script>
+    <script src="../assets/js/script.js"></script>
+    <script>initLoginForm();</script>
+</body>
+
+</html>

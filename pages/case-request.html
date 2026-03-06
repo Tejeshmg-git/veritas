@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../assets/images/logo/logo-main.png">
+    <title>VERITAS — Submit a Confidential Case Request</title>
+    <meta name="description"
+        content="Submit a secure, confidential case request to Veritas. All information is encrypted and handled with the highest level of discretion.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .case-form-section {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius-lg);
+            padding: 60px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+            position: relative;
+        }
+
+        .case-form-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .hero-trust-indicators {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 24px;
+            margin-top: 32px;
+        }
+
+        .trust-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            background: var(--accent-gold-soft);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius-pill);
+            font-size: 0.85rem;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: var(--transition-spring);
+            cursor: default;
+        }
+
+        .trust-indicator:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-gold);
+            background: rgba(212, 165, 116, 0.08);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .trust-indicator i {
+            color: var(--accent-gold);
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin: 60px auto;
+            max-width: 1000px;
+        }
+
+        .process-step-item {
+            text-align: center;
+            padding: 30px;
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius-lg);
+            transition: var(--transition-spring);
+        }
+
+        .process-step-item:hover {
+            border-color: var(--accent-gold);
+            transform: translateY(-5px);
+        }
+
+        .step-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--accent-gold-soft);
+            color: var(--accent-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 0 auto 16px;
+        }
+
+        .process-step-item h3 {
+            font-size: 1rem;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .process-step-item p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .form-progress {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 48px;
+            position: relative;
+        }
+
+        .form-progress::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 50px;
+            right: 50px;
+            height: 2px;
+            background: var(--glass-border);
+            z-index: 1;
+        }
+
+        .progress-step {
+            position: relative;
+            z-index: 2;
+            background: var(--bg-card);
+            padding: 0 10px;
+            text-align: center;
+        }
+
+        .progress-dot {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--bg-secondary);
+            border: 2px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin: 0 auto 8px;
+            transition: var(--transition);
+        }
+
+        .progress-step.active .progress-dot {
+            background: var(--accent-gold);
+            border-color: var(--accent-gold);
+            color: #080B16;
+            box-shadow: 0 0 15px rgba(212, 165, 116, 0.3);
+        }
+
+        .progress-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .progress-step.active .progress-label {
+            color: var(--accent-gold);
+        }
+
+        .portal-prompt {
+            text-align: center;
+            padding: 24px;
+            background: rgba(139, 92, 246, 0.05);
+            border: 1px solid rgba(139, 92, 246, 0.1);
+            border-radius: var(--border-radius-lg);
+            margin-bottom: 40px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .portal-prompt p {
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .urgency-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-top: 8px;
+        }
+
+        .urgency-option {
+            cursor: pointer;
+            position: relative;
+        }
+
+        .urgency-option input {
+            display: none;
+        }
+
+        .urgency-option .option-content {
+            display: block;
+            padding: 16px 20px;
+            border-radius: var(--border-radius);
+            background: var(--bg-card);
+            border: 1.5px solid var(--glass-border);
+            transition: var(--transition-spring);
+        }
+
+        .urgency-option:hover .option-content {
+            border-color: var(--accent-gold);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .urgency-option .option-title {
+            display: block;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .urgency-option .option-desc {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .urgency-option input:checked+.option-content {
+            background: var(--accent-gold-soft);
+            border-color: var(--accent-gold);
+        }
+
+        .urgency-option input:checked+.option-content .option-title {
+            color: var(--accent-gold);
+        }
+
+        .upload-zone {
+            border: 2px dashed var(--glass-border);
+            padding: 40px;
+            text-align: center;
+            border-radius: var(--border-radius-lg);
+            transition: var(--transition);
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .upload-zone:hover {
+            border-color: var(--accent-gold);
+            background: var(--accent-gold-soft);
+        }
+
+        .upload-zone i {
+            font-size: 2.5rem;
+            color: var(--accent-gold);
+            margin-bottom: 16px;
+        }
+
+        .confidentiality-assurance {
+            margin-top: 80px;
+            padding: 60px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius-lg);
+            text-align: center;
+        }
+
+        .assurance-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .assurance-item {
+            transition: var(--transition-spring);
+        }
+
+        .assurance-item:hover {
+            transform: translateY(-8px);
+        }
+
+        .assurance-item:hover i {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .assurance-item i {
+            font-size: 2rem;
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+            transition: var(--transition-spring);
+        }
+
+        .assurance-item h4 {
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        .assurance-item p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .submit-area {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .submit-reassurance {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .submit-reassurance span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        @media (max-width: 1024px) {
+            section {
+                padding: 60px 0;
+            }
+
+            .confidentiality-assurance {
+                padding: 40px;
+                margin-top: 60px;
+            }
+
+            .process-steps,
+            .assurance-grid {
+                gap: 20px;
+            }
+
+            .process-step-item,
+            .assurance-item {
+                padding: 24px 20px;
+            }
+
+            .assurance-item i {
+                font-size: 1.6rem;
+                margin-bottom: 12px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .case-form-section {
+                padding: 40px 24px;
+            }
+        }
+
+        @media (max-width: 767px) {
+
+            .process-steps,
+            .assurance-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-step-item,
+            .assurance-item {
+                padding: 30px;
+            }
+
+            .form-row,
+            .urgency-options {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .case-form-section {
+                padding: 30px 15px;
+            }
+
+            .form-progress {
+                margin-bottom: 30px;
+                gap: 5px;
+            }
+
+            .progress-label {
+                display: none;
+            }
+
+            .progress-dot {
+                width: 28px;
+                height: 28px;
+                font-size: 0.75rem;
+            }
+
+            .form-progress::before {
+                top: 13px;
+                left: 30px;
+                right: 30px;
+            }
+
+            .secure-indicator {
+                font-size: 0.8rem;
+                padding: 12px;
+                flex-direction: column;
+                text-align: center;
+                gap: 8px;
+            }
+
+            .portal-prompt {
+                padding: 20px 15px;
+            }
+
+            .portal-prompt p {
+                font-size: 0.85rem;
+            }
+
+            .btn-outline {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .upload-zone {
+                padding: 25px 15px;
+            }
+
+            .upload-zone h3 {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="animated-bg"></div>
+    <div class="nav-overlay" id="nav-overlay"></div>
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="../index.html" class="navbar-brand"><img src="../assets/images/logo/logo-main.png"
+                    alt="Veritas Logo" class="brand-logo"> VERITAS</a>
+            <div class="nav-links" id="nav-links">
+                <button class="nav-back mobile-only" id="nav-back"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                <a href="../index.html">Home - 1</a>
+                <a href="home-v2.html">Home - 2</a>
+                <a href="services.html">Services</a>
+                <a href="case-request.html" class="active">Request Case</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <div class="nav-item-dropdown">
+                    <a href="dashboard.html" class="dropdown-toggle">Dashboard <i
+                            class="fa-solid fa-chevron-down"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="admin-cases.html">Admin</a>
+                        <a href="dashboard.html">User</a>
+                    </div>
+                </div>
+
+                <hr class="mobile-only">
+                <a href="login.html" class="btn btn-outline nav-login-btn mobile-only">Login</a>
+            </div>
+
+            <div class="nav-actions">
+                <a href="login.html" class="btn btn-primary nav-login-btn desktop-only">Login</a>
+
+                <div class="nav-controls">
+                    <button class="rtl-toggle" id="rtl-toggle" aria-label="Toggle RTL">
+                        <i class="fa-solid fa-language"></i>
+                    </button>
+                    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                        <i class="fa-solid fa-sun"></i>
+                    </button>
+                    <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="page-header case-request-header">
+        <div class="container">
+            <h1>Case Request</h1>
+            <p>Submit your request through our secure, encrypted portal. All information is managed with extreme
+                military-grade discretion.</p>
+
+            <div class="hero-trust-indicators">
+                <div class="trust-indicator">
+                    <i class="fa-solid fa-lock"></i>
+                    <span>End-to-End Encryption</span>
+                </div>
+                <div class="trust-indicator">
+                    <i class="fa-solid fa-user-shield"></i>
+                    <span>Senior Investigator Review</span>
+                </div>
+                <div class="trust-indicator">
+                    <i class="fa-solid fa-folder-closed"></i>
+                    <span>Secure Evidence Handling</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="padding-bottom: 0;">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="label">Our Process</span>
+                <h2>What Happens After Submission</h2>
+            </div>
+
+            <div class="process-steps" data-aos="fade-up">
+                <div class="process-step-item">
+                    <div class="step-icon">1</div>
+                    <h3>Request Submitted</h3>
+                    <p>Your information is securely received by our vetted operations team.</p>
+                </div>
+                <div class="process-step-item">
+                    <div class="step-icon">2</div>
+                    <h3>Investigator Review</h3>
+                    <p>A senior investigator evaluates your case details and determines feasibility.</p>
+                </div>
+                <div class="process-step-item">
+                    <div class="step-icon">3</div>
+                    <h3>Confidential Consultation</h3>
+                    <p>We contact you privately via your preferred method to discuss the next steps.</p>
+                </div>
+            </div>
+
+            <div class="portal-prompt" data-aos="fade-up">
+                <p>Already a registered client? Access your active case archives through the portal.</p>
+                <a href="login.html" class="btn btn-outline">
+                    <i class="fa-solid fa-right-to-bracket"></i> Secure Client Login
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section style="padding-top: 60px;">
+        <div class="container">
+            <div class="case-form-section" data-aos="fade-up">
+                <div class="form-progress">
+                    <div class="progress-step active">
+                        <div class="progress-dot">1</div>
+                        <div class="progress-label">Contact Info</div>
+                    </div>
+                    <div class="progress-step">
+                        <div class="progress-dot">2</div>
+                        <div class="progress-label">Case Details</div>
+                    </div>
+                    <div class="progress-step">
+                        <div class="progress-dot">3</div>
+                        <div class="progress-label">Documents</div>
+                    </div>
+                    <div class="progress-step">
+                        <div class="progress-dot">4</div>
+                        <div class="progress-label">Submit</div>
+                    </div>
+                </div>
+
+                <div class="secure-indicator"
+                    style="margin-bottom: 32px; justify-content: center; background: rgba(34, 197, 94, 0.1); color: #22C55E; border: 1px solid rgba(34, 197, 94, 0.2);">
+                    <i class="fa-solid fa-shield-halved"></i> 256-bit SSL Secure & Encrypted Connection
+                </div>
+
+                <form class="contact-form" id="case-request-form">
+                    <div class="form-row">
+                        <div class="form-group"><label for="cr-name">Full Name *</label><input type="text" id="cr-name"
+                                placeholder="Your full name" required></div>
+                        <div class="form-group"><label for="cr-email">Email Address *</label><input type="email"
+                                id="cr-email" placeholder="your@email.com" required></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group"><label for="cr-phone">Phone Number</label><input type="tel"
+                                id="cr-phone" placeholder="+1 (555) 000-0000"></div>
+                        <div class="form-group"><label for="cr-company">Company / Organization</label><input type="text"
+                                id="cr-company" placeholder="Optional"></div>
+                    </div>
+                    <div class="form-group">
+                        <select id="cr-type" required
+                            style="padding: 16px 20px; background: var(--bg-secondary); border: 1.5px solid var(--glass-border); border-radius: var(--border-radius); color: var(--text-primary); font-size: 1rem; width: 100%;">
+                            <option value="" disabled selected>Select investigation type</option>
+                            <option>Corporate Investigation</option>
+                            <option>Background Check</option>
+                            <option>Digital Forensics</option>
+                            <option>Fraud Investigation</option>
+                            <option>Missing Person Investigation</option>
+                            <option>Surveillance Operations</option>
+                            <option>Other / Not Sure</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Urgency Level *</label>
+                        <div class="urgency-options">
+                            <label class="urgency-option">
+                                <input type="radio" name="urgency" value="standard" checked>
+                                <div class="option-content">
+                                    <span class="option-title">Standard</span>
+                                    <span class="option-desc">Response within 24–48 hours</span>
+                                </div>
+                            </label>
+                            <label class="urgency-option">
+                                <input type="radio" name="urgency" value="priority">
+                                <div class="option-content">
+                                    <span class="option-title">Priority</span>
+                                    <span class="option-desc">Same business day response</span>
+                                </div>
+                            </label>
+                            <label class="urgency-option">
+                                <input type="radio" name="urgency" value="urgent">
+                                <div class="option-content">
+                                    <span class="option-title">Urgent</span>
+                                    <span class="option-desc">Response within 6 hours</span>
+                                </div>
+                            </label>
+                            <label class="urgency-option">
+                                <input type="radio" name="urgency" value="critical">
+                                <div class="option-content">
+                                    <span class="option-title">Critical</span>
+                                    <span class="option-desc">Immediate / Emergency attention</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group"><label for="cr-subject">Subject *</label><input type="text" id="cr-subject"
+                            placeholder="Brief subject line" required></div>
+                    <div class="form-group"><label for="cr-details">Case Details *</label><textarea id="cr-details"
+                            rows="6"
+                            placeholder="Please describe your situation in as much detail as you're comfortable sharing. All information is strictly confidential."
+                            required></textarea></div>
+                    <div class="form-group">
+                        <label>Supporting Documents (Encrypted Upload)</label>
+                        <div class="upload-zone" onclick="document.getElementById('cr-files').click()">
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                            <h3>📂 Drag files here or browse</h3>
+                            <p>Supported: PDF, DOC, JPG, PNG | Max: 10MB per file</p>
+                            <div style="margin-top: 15px; font-size: 0.75rem; color: var(--accent-gold);">
+                                <i class="fa-solid fa-lock-keyhole" style="font-size: 0.8rem; margin-right: 5px;"></i>
+                                All uploads are automatically encrypted
+                            </div>
+                        </div>
+                        <input type="file" id="cr-files" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                            style="display:none;">
+                    </div>
+
+                    <div class="submit-area">
+                        <button type="submit" class="btn btn-primary"
+                            style="width: 100%; min-height: 60px; font-size: 1.15rem; justify-content: center;">
+                            <i class="fa-solid fa-file-shield"></i> Submit Secure Case Request
+                        </button>
+                        <div class="submit-reassurance">
+                            <span><i class="fa-solid fa-lock"></i> AES-256 Encrypted submission</span>
+                            <span><i class="fa-solid fa-scale-balanced"></i> Legally compliant procedures</span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="confidentiality-assurance" data-aos="fade-up">
+                <div class="section-header" style="margin-bottom: 20px;">
+                    <span class="label">Our Guarantee</span>
+                    <h2>Your Information Remains Confidential</h2>
+                </div>
+                <p style="max-width: 700px; margin: 0 auto; color: var(--text-secondary); line-height: 1.8;">
+                    All case submissions are protected using end-to-end encrypted communication protocols. Only
+                    authorized investigators with top-level clearance can access your data. Veritas never discloses
+                    client information to third parties without explicit, written consent.
+                </p>
+                <div class="assurance-grid">
+                    <div class="assurance-item">
+                        <i class="fa-solid fa-database"></i>
+                        <h4>Data Protection</h4>
+                        <p>Military-grade storage & encryption</p>
+                    </div>
+                    <div class="assurance-item">
+                        <i class="fa-solid fa-gavel"></i>
+                        <h4>Legal Compliance</h4>
+                        <p>Strict adherence to privacy laws</p>
+                    </div>
+                    <div class="assurance-item">
+                        <i class="fa-solid fa-user-ninja"></i>
+                        <h4>Investigator Secrecy</h4>
+                        <p>Vetted pros under strict NDAs</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column"><a href="../index.html" class="navbar-brand" style="margin-bottom:8px;"><img
+                            src="../assets/images/logo/logo-main.png" alt="Veritas Logo" class="brand-logo"> VERITAS</a>
+                    <p class="footer-brand-desc">Intelligence Behind the Truth. Premier private investigation agency
+                        delivering confidential, results-driven solutions.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Home - 1</a></li>
+                        <li><a href="home-v2.html">Home - 2</a></li>
+                        <li><a href="case-request.html">Request Case</a></li>
+                        <li><a href="404.html">404 Error</a></li>
+                        <li><a href="coming-soon.html">Coming Soon</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="services.html">Our Services</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="admin-cases.html">Admin Dashboard</a></li>
+                        <li><a href="dashboard.html">User Dashboard</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Security Updates</h4>
+                    <p style="color:var(--text-secondary);font-size:0.9rem;margin-bottom:16px;">Advanced investigative
+                        intelligence delivered with absolute precision and confidentiality.</p>
+                    <form class="newsletter-form" id="newsletter-form"><input type="email"
+                            placeholder="Your email address" required><button type="submit">Subscribe</button></form>
+                    <p
+                        style="color: var(--accent-gold); font-size: 0.75rem; margin-top: 15px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">
+                        Trusted by Global Intelligence Professionals</p>
+                </div>
+            </div>
+            <div class="footer-bottom"><span>&copy; 2026 Veritas Investigations.</span>
+                <div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a><a
+                        href="#">Confidentiality</a></div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>AOS.init({ duration: 800, once: true, offset: 100 });</script>
+    <script src="../assets/js/script.js"></script>
+    <script>initCaseRequestForm();</script>
+</body>
+
+</html>

@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../assets/images/logo/logo-main.png">
+    <title>VERITAS — Case Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .sidebar-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .sidebar-user {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .sidebar-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .sidebar-user-info h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .sidebar-user-info p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .sidebar-section {
+            padding: 16px 16px 8px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .case-header-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .case-meta {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .case-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .case-meta-item i {
+            color: var(--accent-gold);
+        }
+
+        .case-detail-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 28px;
+        }
+
+        .detail-card {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius-lg);
+        }
+
+        .detail-card-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .detail-card-header h3 {
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .detail-card-body {
+            padding: 24px;
+        }
+
+        .evidence-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            margin-bottom: 8px;
+        }
+
+        .evidence-item:hover {
+            background: var(--accent-gold-soft);
+        }
+
+        .evidence-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: var(--accent-gold-soft);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-gold);
+            flex-shrink: 0;
+        }
+
+        .evidence-info h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .evidence-info p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .mobile-sidebar-toggle {
+            display: none;
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 1050;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            color: #fff;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 20px rgba(201, 168, 76, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .mobile-sidebar-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .case-detail-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline::before {
+                left: 15px !important;
+            }
+
+            .timeline-item {
+                padding-left: 45px !important;
+            }
+
+            .timeline-item::after {
+                left: 10px !important;
+            }
+        }
+
+        /* --- New Timeline Styles --- */
+        .timeline {
+            position: relative;
+            padding: 10px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 20px;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, var(--glass-border), transparent);
+            opacity: 0.5;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 55px;
+            margin-bottom: 30px;
+            transition: var(--transition);
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 14px;
+            top: 6px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--bg-primary);
+            border: 2px solid var(--accent-gold);
+            z-index: 2;
+            box-shadow: 0 0 10px rgba(201, 168, 76, 0.3);
+            transition: var(--transition);
+        }
+
+        .timeline-item:hover::after {
+            background: var(--accent-gold);
+            transform: scale(1.2);
+            box-shadow: 0 0 15px var(--accent-gold);
+        }
+
+        .timeline-date {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .timeline-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            font-family: var(--font-display);
+        }
+
+        .timeline-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 15px 20px;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--glass-border);
+            transition: var(--transition);
+        }
+
+        .timeline-item:hover .timeline-desc {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(201, 168, 76, 0.2);
+            transform: translateX(5px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="animated-bg"></div>
+    <nav class="navbar dash-header" id="navbar">
+        <div class="container">
+            <a href="../index.html" class="navbar-brand"><img src="../assets/images/logo/logo-main.png"
+                    alt="Veritas Logo" class="brand-logo"> VERITAS</a>
+
+            <div class="nav-actions">
+                <div class="nav-controls">
+                    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                        <i class="fa-solid fa-sun"></i>
+                    </button>
+                    <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="sidebar-overlay"></div>
+    <div class="dashboard-layout">
+        <aside class="dashboard-sidebar" id="dashboard-sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-user">
+                    <div class="sidebar-avatar">JM</div>
+                    <div class="sidebar-user-info">
+                        <h4>James Mitchell</h4>
+                        <p>Client #VR-2847</p>
+                    </div>
+                    <button class="sidebar-close" onclick="closeSidebar()"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            </div>
+            <div class="sidebar-section">Navigation</div>
+            <div class="sidebar-menu">
+                <a href="dashboard.html" class="sidebar-item"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+                <a href="case-details.html" class="sidebar-item active"><i class="fa-solid fa-folder-open"></i> Case
+                    Details</a>
+                <a href="messages.html" class="sidebar-item"><i class="fa-solid fa-comments"></i> Messages</a>
+                <a href="documents.html" class="sidebar-item"><i class="fa-solid fa-file-shield"></i> Documents</a>
+            </div>
+            <div class="sidebar-section">Account</div>
+            <div class="sidebar-menu">
+                <a href="javascript:history.back()" class="sidebar-item"><i class="fa-solid fa-arrow-left"></i> Back</a>
+                <a href="login.html" class="sidebar-item"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            </div>
+        </aside>
+
+        <main class="dashboard-main">
+            <div class="case-header-info" data-aos="fade-up">
+                <div>
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                        <h1 style="font-family: var(--font-display); font-size: 1.6rem;">Case VR-2847-A</h1>
+                        <span class="status-badge active">Active</span>
+                    </div>
+                    <p style="color: var(--text-secondary); margin-bottom: 8px;">Corporate Fraud Investigation —
+                        Financial Irregularities</p>
+                    <div class="case-meta">
+                        <div class="case-meta-item"><i class="fa-solid fa-calendar"></i> Opened: Jan 15, 2026</div>
+                        <div class="case-meta-item"><i class="fa-solid fa-user-shield"></i> Lead: Agent R. Hayes</div>
+                        <div class="case-meta-item"><i class="fa-solid fa-clock"></i> Updated: 2 hours ago</div>
+                    </div>
+                </div>
+                <div class="confidential-badge"><i class="fa-solid fa-lock"></i> Confidential</div>
+            </div>
+
+            <div class="case-detail-grid" data-aos="fade-up">
+                <!-- Timeline -->
+                <div class="detail-card">
+                    <div class="detail-card-header">
+                        <h3>Investigation Timeline</h3>
+                    </div>
+                    <div class="detail-card-body">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-date">Mar 5, 2026</div>
+                                <div class="timeline-title">Surveillance Report Filed</div>
+                                <div class="timeline-desc">Subject was observed meeting with unidentified individual at
+                                    financial district location. Photographic evidence collected.</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">Feb 28, 2026</div>
+                                <div class="timeline-title">Financial Records Analyzed</div>
+                                <div class="timeline-desc">Forensic accounting team identified three suspicious
+                                    transactions totaling $185,000 routed through shell companies.</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">Feb 15, 2026</div>
+                                <div class="timeline-title">Digital Forensics Complete</div>
+                                <div class="timeline-desc">Email correspondence recovered from backup servers revealing
+                                    communication with external parties.</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">Jan 28, 2026</div>
+                                <div class="timeline-title">Initial Surveillance Initiated</div>
+                                <div class="timeline-desc">Field operatives deployed for covert surveillance of primary
+                                    subject during business hours.</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">Jan 15, 2026</div>
+                                <div class="timeline-title">Case Opened</div>
+                                <div class="timeline-desc">Investigation initiated following client consultation.
+                                    Strategy defined with clear objectives and milestones.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Evidence & Info -->
+                <div style="display: flex; flex-direction: column; gap: 28px;">
+                    <div class="detail-card">
+                        <div class="detail-card-header">
+                            <h3>Evidence Files</h3>
+                        </div>
+                        <div class="detail-card-body">
+                            <div class="evidence-item">
+                                <div class="evidence-icon"><i class="fa-solid fa-file-pdf"></i></div>
+                                <div class="evidence-info">
+                                    <h4>Surveillance_Report_Mar5.pdf</h4>
+                                    <p>2.4 MB • Today</p>
+                                </div>
+                            </div>
+                            <div class="evidence-item">
+                                <div class="evidence-icon"><i class="fa-solid fa-file-excel"></i></div>
+                                <div class="evidence-info">
+                                    <h4>Financial_Analysis.xlsx</h4>
+                                    <p>1.8 MB • Feb 28</p>
+                                </div>
+                            </div>
+                            <div class="evidence-item">
+                                <div class="evidence-icon"><i class="fa-solid fa-file-image"></i></div>
+                                <div class="evidence-info">
+                                    <h4>Photo_Evidence_Set1.zip</h4>
+                                    <p>8.5 MB • Feb 20</p>
+                                </div>
+                            </div>
+                            <div class="evidence-item">
+                                <div class="evidence-icon"><i class="fa-solid fa-file-lines"></i></div>
+                                <div class="evidence-info">
+                                    <h4>Email_Recovery_Log.pdf</h4>
+                                    <p>560 KB • Feb 15</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="detail-card">
+                        <div class="detail-card-header">
+                            <h3>Case Summary</h3>
+                        </div>
+                        <div class="detail-card-body">
+                            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 16px;">
+                                Investigation into suspected financial irregularities within client's organization.
+                                Multiple avenues of inquiry are being pursued simultaneously.</p>
+                            <div style="display: flex; flex-direction: column; gap: 12px;">
+                                <div style="display: flex; justify-content: space-between; font-size: 0.85rem;"><span
+                                        style="color: var(--text-muted);">Progress</span><span
+                                        style="color: var(--accent-gold); font-weight: 600;">65%</span></div>
+                                <div
+                                    style="height: 6px; background: var(--glass-border); border-radius: 3px; overflow: hidden;">
+                                    <div
+                                        style="width: 65%; height: 100%; background: var(--accent-gradient); border-radius: 3px;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <button class="mobile-sidebar-toggle" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>AOS.init({ duration: 800, once: true });</script>
+    <script src="../assets/js/script.js"></script>
+</body>
+
+</html>

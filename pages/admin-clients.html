@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../assets/images/logo/logo-main.png">
+    <title>VERITAS Admin — Client Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .sidebar-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .sidebar-user {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .sidebar-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .sidebar-user-info h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .sidebar-user-info p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .sidebar-section {
+            padding: 16px 16px 8px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .client-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .client-card {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius-lg);
+            padding: 28px;
+            transition: var(--transition);
+        }
+
+        .client-card:hover {
+            border-color: var(--accent-gold);
+            transform: translateY(-4px);
+        }
+
+        .client-card-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .client-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .client-name {
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .client-id {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .client-details {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .client-detail {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .client-detail i {
+            color: var(--accent-gold);
+            width: 16px;
+            text-align: center;
+        }
+
+        .client-card-footer {
+            display: flex;
+            gap: 8px;
+            border-top: 1px solid var(--glass-border);
+            padding-top: 16px;
+        }
+
+        .client-action {
+            padding: 8px 16px;
+            border-radius: var(--border-radius-pill);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+
+        .client-action:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+        }
+
+        .search-bar {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 12px 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius);
+            color: var(--text-primary);
+        }
+
+        .mobile-sidebar-toggle {
+            display: none;
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 1050;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            color: #fff;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 20px rgba(201, 168, 76, 0.4);
+        }
+
+        /* ---- Mobile & Tablet (<= 828px) ---- */
+        @media (max-width: 828px) {
+            .mobile-sidebar-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .admin-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 14px;
+            }
+
+            .admin-header h1 {
+                font-size: 1.6rem !important;
+            }
+
+            .admin-actions {
+                width: 100%;
+            }
+
+            .admin-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .dash-stats {
+                grid-template-columns: 1fr 1fr !important;
+                gap: 12px !important;
+            }
+
+            .dash-stat-card {
+                padding: 20px !important;
+            }
+
+            .dash-stat-value {
+                font-size: 1.6rem !important;
+            }
+
+            .search-bar {
+                flex-direction: column;
+            }
+
+            .search-bar input {
+                width: 100%;
+            }
+
+            .search-bar .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .client-cards {
+                grid-template-columns: 1fr !important;
+                gap: 16px;
+            }
+
+            .client-card {
+                padding: 20px;
+            }
+
+            .client-card-header {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .client-card-footer {
+                flex-wrap: wrap;
+            }
+
+            .client-action {
+                flex: 1;
+                text-align: center;
+                min-width: 70px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .dash-stats {
+                grid-template-columns: 1fr !important;
+            }
+
+            .client-card-footer {
+                flex-direction: column;
+            }
+
+            .client-action {
+                width: 100%;
+                padding: 10px 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="animated-bg"></div>
+    <nav class="navbar dash-header" id="navbar">
+        <div class="container">
+            <a href="../index.html" class="navbar-brand"><img src="../assets/images/logo/logo-main.png"
+                    alt="Veritas Logo" class="brand-logo"> VERITAS</a>
+
+            <div class="nav-actions">
+                <div class="nav-controls">
+                    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                        <i class="fa-solid fa-sun"></i>
+                    </button>
+                    <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="sidebar-overlay"></div>
+    <div class="dashboard-layout">
+        <aside class="dashboard-sidebar" id="dashboard-sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-user">
+                    <div class="sidebar-avatar">RH</div>
+                    <div class="sidebar-user-info">
+                        <h4>Richard Hayes</h4>
+                        <p>Administrator</p>
+                    </div>
+                    <button class="sidebar-close" onclick="closeSidebar()"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            </div>
+            <div class="sidebar-section">Admin Panel</div>
+            <div class="sidebar-menu">
+                <a href="admin-cases.html" class="sidebar-item"><i class="fa-solid fa-folder-open"></i> Case
+                    Management</a>
+                <a href="admin-clients.html" class="sidebar-item active"><i class="fa-solid fa-users"></i> Client
+                    Management</a>
+                <a href="admin-evidence.html" class="sidebar-item"><i class="fa-solid fa-cloud-arrow-up"></i> Evidence
+                    Upload</a>
+                <a href="admin-reports.html" class="sidebar-item"><i class="fa-solid fa-chart-line"></i> Reports</a>
+            </div>
+            <div class="sidebar-section">System</div>
+            <div class="sidebar-menu">
+                <a href="javascript:history.back()" class="sidebar-item"><i class="fa-solid fa-arrow-left"></i> Back</a>
+                <a href="login.html" class="sidebar-item"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            </div>
+        </aside>
+
+        <main class="dashboard-main">
+            <div class="admin-header" data-aos="fade-up">
+                <h1 style="font-family: var(--font-display);">Client Management</h1>
+                <div class="admin-actions"><button class="btn btn-primary btn-small"><i
+                            class="fa-solid fa-user-plus"></i> Add Client</button></div>
+            </div>
+
+            <div class="dash-stats" data-aos="fade-up">
+                <div class="dash-stat-card">
+                    <div class="dash-stat-label">Total Clients</div>
+                    <div class="dash-stat-value">32</div>
+                </div>
+                <div class="dash-stat-card">
+                    <div class="dash-stat-label">Active Clients</div>
+                    <div class="dash-stat-value">19</div>
+                </div>
+                <div class="dash-stat-card">
+                    <div class="dash-stat-label">New This Month</div>
+                    <div class="dash-stat-value">4</div>
+                </div>
+                <div class="dash-stat-card">
+                    <div class="dash-stat-label">Corporate Accounts</div>
+                    <div class="dash-stat-value">11</div>
+                </div>
+            </div>
+
+            <div class="search-bar" data-aos="fade-up">
+                <input type="text" placeholder="Search clients by name, ID, or email...">
+                <button class="btn btn-outline btn-small"><i class="fa-solid fa-search"></i> Search</button>
+            </div>
+
+            <div class="client-cards" data-aos="fade-up">
+                <div class="client-card">
+                    <div class="client-card-header">
+                        <div class="client-avatar">JM</div>
+                        <div>
+                            <div class="client-name">James Mitchell</div>
+                            <div class="client-id">Client #VR-2847</div>
+                        </div><span class="status-badge active" style="margin-left:auto;">Active</span>
+                    </div>
+                    <div class="client-details">
+                        <div class="client-detail"><i class="fa-solid fa-envelope"></i> j.mitchell@email.com</div>
+                        <div class="client-detail"><i class="fa-solid fa-folder"></i> 3 Active Cases</div>
+                        <div class="client-detail"><i class="fa-solid fa-calendar"></i> Client since Jan 2026</div>
+                    </div>
+                    <div class="client-card-footer"><button class="client-action"><i class="fa-solid fa-eye"></i>
+                            View</button><button class="client-action"><i class="fa-solid fa-pen"></i>
+                            Edit</button><button class="client-action"><i class="fa-solid fa-message"></i>
+                            Message</button></div>
+                </div>
+                <div class="client-card">
+                    <div class="client-card-header">
+                        <div class="client-avatar">SP</div>
+                        <div>
+                            <div class="client-name">Sullivan & Partners</div>
+                            <div class="client-id">Client #VR-3102</div>
+                        </div><span class="status-badge active" style="margin-left:auto;">Active</span>
+                    </div>
+                    <div class="client-details">
+                        <div class="client-detail"><i class="fa-solid fa-envelope"></i> legal@sullivan-law.com</div>
+                        <div class="client-detail"><i class="fa-solid fa-folder"></i> 1 Active Case</div>
+                        <div class="client-detail"><i class="fa-solid fa-calendar"></i> Client since Nov 2025</div>
+                    </div>
+                    <div class="client-card-footer"><button class="client-action"><i class="fa-solid fa-eye"></i>
+                            View</button><button class="client-action"><i class="fa-solid fa-pen"></i>
+                            Edit</button><button class="client-action"><i class="fa-solid fa-message"></i>
+                            Message</button></div>
+                </div>
+                <div class="client-card">
+                    <div class="client-card-header">
+                        <div class="client-avatar">EC</div>
+                        <div>
+                            <div class="client-name">Elena Cortez</div>
+                            <div class="client-id">Client #VR-3156</div>
+                        </div><span class="status-badge urgent" style="margin-left:auto;">Priority</span>
+                    </div>
+                    <div class="client-details">
+                        <div class="client-detail"><i class="fa-solid fa-envelope"></i> ecortez@privmail.com</div>
+                        <div class="client-detail"><i class="fa-solid fa-folder"></i> 1 Active Case</div>
+                        <div class="client-detail"><i class="fa-solid fa-calendar"></i> Client since Feb 2026</div>
+                    </div>
+                    <div class="client-card-footer"><button class="client-action"><i class="fa-solid fa-eye"></i>
+                            View</button><button class="client-action"><i class="fa-solid fa-pen"></i>
+                            Edit</button><button class="client-action"><i class="fa-solid fa-message"></i>
+                            Message</button></div>
+                </div>
+                <div class="client-card">
+                    <div class="client-card-header">
+                        <div class="client-avatar">TC</div>
+                        <div>
+                            <div class="client-name">TechCorp Inc.</div>
+                            <div class="client-id">Client #VR-2901</div>
+                        </div><span class="status-badge closed" style="margin-left:auto;">Inactive</span>
+                    </div>
+                    <div class="client-details">
+                        <div class="client-detail"><i class="fa-solid fa-envelope"></i> security@techcorp.com</div>
+                        <div class="client-detail"><i class="fa-solid fa-folder"></i> 0 Active Cases</div>
+                        <div class="client-detail"><i class="fa-solid fa-calendar"></i> Client since Sep 2025</div>
+                    </div>
+                    <div class="client-card-footer"><button class="client-action"><i class="fa-solid fa-eye"></i>
+                            View</button><button class="client-action"><i class="fa-solid fa-pen"></i>
+                            Edit</button><button class="client-action"><i class="fa-solid fa-message"></i>
+                            Message</button></div>
+                </div>
+                <div class="client-card">
+                    <div class="client-card-header">
+                        <div class="client-avatar">ML</div>
+                        <div>
+                            <div class="client-name">Morgan & Lowe LLP</div>
+                            <div class="client-id">Client #VR-2788</div>
+                        </div><span class="status-badge closed" style="margin-left:auto;">Inactive</span>
+                    </div>
+                    <div class="client-details">
+                        <div class="client-detail"><i class="fa-solid fa-envelope"></i> inquiry@morganlowe.com</div>
+                        <div class="client-detail"><i class="fa-solid fa-folder"></i> 0 Active Cases</div>
+                        <div class="client-detail"><i class="fa-solid fa-calendar"></i> Client since Jul 2025</div>
+                    </div>
+                    <div class="client-card-footer"><button class="client-action"><i class="fa-solid fa-eye"></i>
+                            View</button><button class="client-action"><i class="fa-solid fa-pen"></i>
+                            Edit</button><button class="client-action"><i class="fa-solid fa-message"></i>
+                            Message</button></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <button class="mobile-sidebar-toggle" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>AOS.init({ duration: 800, once: true });</script>
+    <script src="../assets/js/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../assets/images/logo/logo-main.png">
+    <title>VERITAS Admin — Reports & Analytics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .sidebar-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .sidebar-user {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .sidebar-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .sidebar-user-info h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .sidebar-user-info p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .sidebar-section {
+            padding: 16px 16px 8px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .reports-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+        }
+
+        .report-card {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+        }
+
+        .report-card-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .report-card-header h3 {
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .report-card-body {
+            padding: 24px;
+        }
+
+        .chart-placeholder {
+            height: 200px;
+            background: linear-gradient(135deg, rgba(201, 168, 76, 0.05), rgba(0, 180, 216, 0.05));
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chart-bars {
+            display: flex;
+            align-items: flex-end;
+            gap: 12px;
+            height: 160px;
+            padding: 20px;
+        }
+
+        .chart-bar {
+            flex: 1;
+            background: var(--accent-gradient);
+            border-radius: 6px 6px 0 0;
+            transition: all 0.5s ease;
+            opacity: 0.7;
+            min-width: 30px;
+        }
+
+        .chart-bar:hover {
+            opacity: 1;
+        }
+
+        .chart-labels {
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 20px 0;
+        }
+
+        .chart-labels span {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .metric-row:last-child {
+            border: none;
+        }
+
+        .metric-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .metric-value {
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .metric-value.up {
+            color: #22C55E;
+        }
+
+        .metric-value.down {
+            color: #EF4444;
+        }
+
+        .donut-chart {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background: conic-gradient(var(--accent-gold) 0deg 137deg, var(--accent-cyan) 137deg 230deg, #6A6683 230deg 284deg, #EF4444 284deg 360deg);
+            margin: 0 auto 20px;
+            position: relative;
+        }
+
+        .donut-chart::after {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            right: 30px;
+            bottom: 30px;
+            border-radius: 50%;
+            background: var(--bg-card);
+        }
+
+        .donut-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 3px;
+        }
+
+        .mobile-sidebar-toggle {
+            display: none;
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 1050;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            color: #fff;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 20px rgba(201, 168, 76, 0.4);
+        }
+
+        /* ---- Mobile & Tablet (<= 828px) ---- */
+        @media (max-width: 828px) {
+            .mobile-sidebar-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .reports-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .admin-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 14px;
+            }
+
+            .admin-header h1 {
+                font-size: 1.6rem !important;
+            }
+
+            .admin-actions {
+                width: 100%;
+                display: flex;
+                gap: 10px;
+            }
+
+            .admin-actions .btn {
+                flex: 1;
+                justify-content: center;
+                font-size: 0.78rem;
+                padding: 10px 14px;
+            }
+
+            .dash-stats {
+                grid-template-columns: 1fr 1fr !important;
+                gap: 12px !important;
+            }
+
+            .dash-stat-card {
+                padding: 20px !important;
+            }
+
+            .dash-stat-value {
+                font-size: 1.6rem !important;
+            }
+
+            .dash-stat-change {
+                font-size: 0.72rem;
+            }
+
+            .report-card-header {
+                padding: 16px 18px;
+                flex-wrap: wrap;
+                gap: 6px;
+            }
+
+            .report-card-header h3 {
+                font-size: 0.92rem;
+            }
+
+            .report-card-body {
+                padding: 18px;
+            }
+
+            .chart-bars {
+                gap: 8px;
+                padding: 16px 12px;
+                height: 140px;
+            }
+
+            .chart-bar {
+                min-width: 22px;
+            }
+
+            .chart-labels span {
+                font-size: 0.62rem;
+            }
+
+            .donut-chart {
+                width: 130px;
+                height: 130px;
+            }
+
+            .donut-chart::after {
+                top: 25px;
+                left: 25px;
+                right: 25px;
+                bottom: 25px;
+            }
+
+            .donut-legend {
+                gap: 8px;
+            }
+
+            .legend-item {
+                font-size: 0.72rem;
+            }
+
+            .metric-row {
+                padding: 12px 0;
+                flex-wrap: wrap;
+                gap: 4px;
+            }
+
+            .metric-label {
+                font-size: 0.82rem;
+            }
+
+            .metric-value {
+                font-size: 0.88rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .dash-stats {
+                grid-template-columns: 1fr !important;
+            }
+
+            .admin-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="animated-bg"></div>
+    <nav class="navbar dash-header" id="navbar">
+        <div class="container">
+            <a href="../index.html" class="navbar-brand"><img src="../assets/images/logo/logo-main.png"
+                    alt="Veritas Logo" class="brand-logo"> VERITAS</a>
+
+            <div class="nav-actions">
+                <div class="nav-controls">
+                    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                        <i class="fa-solid fa-sun"></i>
+                    </button>
+                    <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="sidebar-overlay"></div>
+    <div class="dashboard-layout">
+        <aside class="dashboard-sidebar" id="dashboard-sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-user">
+                    <div class="sidebar-avatar">RH</div>
+                    <div class="sidebar-user-info">
+                        <h4>Richard Hayes</h4>
+                        <p>Administrator</p>
+                    </div>
+                    <button class="sidebar-close" onclick="closeSidebar()"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            </div>
+            <div class="sidebar-section">Admin Panel</div>
+            <div class="sidebar-menu">
+                <a href="admin-cases.html" class="sidebar-item"><i class="fa-solid fa-folder-open"></i> Case
+                    Management</a>
+                <a href="admin-clients.html" class="sidebar-item"><i class="fa-solid fa-users"></i> Client
+                    Management</a>
+                <a href="admin-evidence.html" class="sidebar-item"><i class="fa-solid fa-cloud-arrow-up"></i> Evidence
+                    Upload</a>
+                <a href="admin-reports.html" class="sidebar-item active"><i class="fa-solid fa-chart-line"></i>
+                    Reports</a>
+            </div>
+            <div class="sidebar-section">System</div>
+            <div class="sidebar-menu">
+                <a href="javascript:history.back()" class="sidebar-item"><i class="fa-solid fa-arrow-left"></i> Back</a>
+                <a href="login.html" class="sidebar-item"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            </div>
+        </aside>
+
+        <main class="dashboard-main">
+            <div class="admin-header" data-aos="fade-up">
+                <h1 style="font-family: var(--font-display);">Reports & Analytics</h1>
+                <div class="admin-actions">
+                    <button class="btn btn-outline btn-small"><i class="fa-solid fa-download"></i> Export</button>
+                    <button class="btn btn-primary btn-small"><i class="fa-solid fa-file-circle-plus"></i> Generate
+                        Report</button>
+                </div>
+            </div>
+
+            <!-- Top Stats -->
+            <div class="dash-stats" data-aos="fade-up">
+                <div class="dash-stat-card">
+                    <div class="dash-stat-label">Cases This Month</div>
+                    <div class="dash-stat-value">8</div>
+                    <div class="dash-stat-change" style="color: #22C55E;"><i class="fa-solid fa-arrow-up"></i> +33% vs
+                        last month</div>
+                </div>
+                <div class="dash-stat-card">
+                    <div class="dash-stat-label">Avg Resolution Time</div>
+                    <div class="dash-stat-value">12d</div>
+                    <div class="dash-stat-change" style="color: #22C55E;"><i class="fa-solid fa-arrow-down"></i> -2 days
+                        faster</div>
+                </div>
+                <div class="dash-stat-card">
+                    <div class="dash-stat-label">Revenue (MTD)</div>
+                    <div class="dash-stat-value">$94K</div>
+                    <div class="dash-stat-change" style="color: #22C55E;"><i class="fa-solid fa-arrow-up"></i> +18%
+                        growth</div>
+                </div>
+                <div class="dash-stat-card">
+                    <div class="dash-stat-label">Client Satisfaction</div>
+                    <div class="dash-stat-value">4.9★</div>
+                    <div class="dash-stat-change"><i class="fa-solid fa-arrow-right"></i> Stable</div>
+                </div>
+            </div>
+
+            <div class="reports-grid" data-aos="fade-up">
+                <!-- Cases by Month -->
+                <div class="report-card">
+                    <div class="report-card-header">
+                        <h3>Cases by Month</h3><span style="font-size: 0.8rem; color: var(--text-muted);">Last 6
+                            months</span>
+                    </div>
+                    <div class="report-card-body">
+                        <div class="chart-bars">
+                            <div class="chart-bar" style="height: 40%;"></div>
+                            <div class="chart-bar" style="height: 55%;"></div>
+                            <div class="chart-bar" style="height: 70%;"></div>
+                            <div class="chart-bar" style="height: 45%;"></div>
+                            <div class="chart-bar" style="height: 85%;"></div>
+                            <div class="chart-bar" style="height: 100%;"></div>
+                        </div>
+                        <div class="chart-labels">
+                            <span>Oct</span><span>Nov</span><span>Dec</span><span>Jan</span><span>Feb</span><span>Mar</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cases by Type -->
+                <div class="report-card">
+                    <div class="report-card-header">
+                        <h3>Cases by Type</h3>
+                    </div>
+                    <div class="report-card-body">
+                        <div class="donut-chart"></div>
+                        <div class="donut-legend">
+                            <div class="legend-item">
+                                <div class="legend-dot" style="background: var(--accent-gold);"></div> Corporate (38%)
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-dot" style="background: var(--accent-cyan);"></div> Fraud (26%)
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-dot" style="background: #6B7280;"></div> Background (15%)
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-dot" style="background: #EF4444;"></div> Other (21%)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Agent Performance -->
+                <div class="report-card">
+                    <div class="report-card-header">
+                        <h3>Agent Performance</h3>
+                    </div>
+                    <div class="report-card-body">
+                        <div class="metric-row"><span class="metric-label">R. Hayes</span><span
+                                class="metric-value up">12 cases • 98%</span></div>
+                        <div class="metric-row"><span class="metric-label">S. Chen</span><span class="metric-value up">9
+                                cases • 97%</span></div>
+                        <div class="metric-row"><span class="metric-label">M. Rivera</span><span
+                                class="metric-value up">8 cases • 100%</span></div>
+                        <div class="metric-row"><span class="metric-label">E. Volkov</span><span
+                                class="metric-value up">7 cases • 96%</span></div>
+                    </div>
+                </div>
+
+                <!-- Revenue Metrics -->
+                <div class="report-card">
+                    <div class="report-card-header">
+                        <h3>Revenue Breakdown</h3>
+                    </div>
+                    <div class="report-card-body">
+                        <div class="metric-row"><span class="metric-label">Corporate Investigations</span><span
+                                class="metric-value">$42,500</span></div>
+                        <div class="metric-row"><span class="metric-label">Fraud Investigations</span><span
+                                class="metric-value">$24,800</span></div>
+                        <div class="metric-row"><span class="metric-label">Background Checks</span><span
+                                class="metric-value">$12,200</span></div>
+                        <div class="metric-row"><span class="metric-label">Digital Forensics</span><span
+                                class="metric-value">$14,500</span></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <button class="mobile-sidebar-toggle" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>AOS.init({ duration: 800, once: true });</script>
+    <script src="../assets/js/script.js"></script>
+</body>
+
+</html>

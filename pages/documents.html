@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../assets/images/logo/logo-main.png">
+    <title>VERITAS — Document Vault</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .sidebar-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .sidebar-user {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .sidebar-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .sidebar-user-info h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .sidebar-user-info p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .sidebar-section {
+            padding: 16px 16px 8px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .doc-filters {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .mobile-sidebar-toggle {
+            display: none;
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 1050;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            color: #fff;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 20px rgba(201, 168, 76, 0.4);
+        }
+
+        @media (max-width: 828px) {
+            .mobile-sidebar-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .dashboard-main {
+                padding: 24px 16px !important;
+                overflow-x: hidden;
+            }
+
+            .documents-grid {
+                grid-template-columns: 1fr !important;
+                gap: 16px !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+            }
+
+            .doc-card {
+                padding: 16px !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+                min-width: 0 !important;
+            }
+
+            .doc-info {
+                min-width: 0;
+            }
+
+            .doc-info h4 {
+                white-space: normal;
+                word-break: break-all;
+                overflow-wrap: break-word;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="animated-bg"></div>
+    <nav class="navbar dash-header" id="navbar">
+        <div class="container">
+            <a href="../index.html" class="navbar-brand"><img src="../assets/images/logo/logo-main.png"
+                    alt="Veritas Logo" class="brand-logo"> VERITAS</a>
+
+            <div class="nav-actions">
+                <div class="nav-controls">
+                    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                        <i class="fa-solid fa-sun"></i>
+                    </button>
+                    <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="sidebar-overlay"></div>
+    <div class="dashboard-layout">
+        <aside class="dashboard-sidebar" id="dashboard-sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-user">
+                    <div class="sidebar-avatar">JM</div>
+                    <div class="sidebar-user-info">
+                        <h4>James Mitchell</h4>
+                        <p>Client #VR-2847</p>
+                    </div>
+                    <button class="sidebar-close" onclick="closeSidebar()"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            </div>
+            <div class="sidebar-section">Navigation</div>
+            <div class="sidebar-menu">
+                <a href="dashboard.html" class="sidebar-item"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+                <a href="case-details.html" class="sidebar-item"><i class="fa-solid fa-folder-open"></i> Case
+                    Details</a>
+                <a href="messages.html" class="sidebar-item"><i class="fa-solid fa-comments"></i> Messages</a>
+                <a href="documents.html" class="sidebar-item active"><i class="fa-solid fa-file-shield"></i>
+                    Documents</a>
+            </div>
+            <div class="sidebar-section">Account</div>
+            <div class="sidebar-menu">
+                <a href="javascript:history.back()" class="sidebar-item"><i class="fa-solid fa-arrow-left"></i> Back</a>
+                <a href="login.html" class="sidebar-item"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            </div>
+        </aside>
+
+        <main class="dashboard-main">
+            <div class="admin-header" data-aos="fade-up">
+                <div>
+                    <h1 style="font-family: var(--font-display); font-size: 1.6rem;">Document Vault</h1>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Securely upload and download
+                        case-related documents.</p>
+                </div>
+                <div style="display: flex; gap: 12px;">
+                    <div class="confidential-badge"><i class="fa-solid fa-lock"></i> Encrypted Storage</div>
+                </div>
+            </div>
+
+            <!-- Upload Zone -->
+            <div data-aos="fade-up" style="margin-bottom: 32px;">
+                <div class="upload-zone" onclick="document.getElementById('doc-upload').click()">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    <h3>Upload Documents</h3>
+                    <p>Drag & drop files or click to browse — PDF, DOC, JPG, PNG (Max 25MB)</p>
+                </div>
+                <input type="file" id="doc-upload" multiple style="display:none;" onchange="handleFileUpload(this)">
+            </div>
+
+            <!-- Filters -->
+            <div class="doc-filters" data-aos="fade-up">
+                <button class="filter-btn active">All Files</button>
+                <button class="filter-btn">Reports</button>
+                <button class="filter-btn">Evidence</button>
+                <button class="filter-btn">Legal</button>
+                <button class="filter-btn">Correspondence</button>
+            </div>
+
+            <!-- Documents Grid -->
+            <div class="documents-grid" data-aos="fade-up">
+                <div class="doc-card">
+                    <div class="doc-icon"><i class="fa-solid fa-file-pdf"></i></div>
+                    <div class="doc-info">
+                        <h4>Surveillance_Report_Mar5.pdf</h4>
+                        <p>2.4 MB • Mar 5, 2026 • Case VR-2847-A</p>
+                    </div>
+                    <div class="doc-actions"><button title="Download"><i
+                                class="fa-solid fa-download"></i></button><button title="View"><i
+                                class="fa-solid fa-eye"></i></button></div>
+                </div>
+                <div class="doc-card">
+                    <div class="doc-icon"><i class="fa-solid fa-file-excel"></i></div>
+                    <div class="doc-info">
+                        <h4>Financial_Analysis.xlsx</h4>
+                        <p>1.8 MB • Feb 28, 2026 • Case VR-2847-A</p>
+                    </div>
+                    <div class="doc-actions"><button title="Download"><i
+                                class="fa-solid fa-download"></i></button><button title="View"><i
+                                class="fa-solid fa-eye"></i></button></div>
+                </div>
+                <div class="doc-card">
+                    <div class="doc-icon"><i class="fa-solid fa-file-zipper"></i></div>
+                    <div class="doc-info">
+                        <h4>Photo_Evidence_Set1.zip</h4>
+                        <p>8.5 MB • Feb 20, 2026 • Case VR-2847-A</p>
+                    </div>
+                    <div class="doc-actions"><button title="Download"><i class="fa-solid fa-download"></i></button>
+                    </div>
+                </div>
+                <div class="doc-card">
+                    <div class="doc-icon"><i class="fa-solid fa-file-lines"></i></div>
+                    <div class="doc-info">
+                        <h4>Email_Recovery_Log.pdf</h4>
+                        <p>560 KB • Feb 15, 2026 • Case VR-2847-A</p>
+                    </div>
+                    <div class="doc-actions"><button title="Download"><i
+                                class="fa-solid fa-download"></i></button><button title="View"><i
+                                class="fa-solid fa-eye"></i></button></div>
+                </div>
+                <div class="doc-card">
+                    <div class="doc-icon"><i class="fa-solid fa-file-pdf"></i></div>
+                    <div class="doc-info">
+                        <h4>Background_Check_Report.pdf</h4>
+                        <p>3.2 MB • Feb 10, 2026 • Case VR-2847-B</p>
+                    </div>
+                    <div class="doc-actions"><button title="Download"><i
+                                class="fa-solid fa-download"></i></button><button title="View"><i
+                                class="fa-solid fa-eye"></i></button></div>
+                </div>
+                <div class="doc-card">
+                    <div class="doc-icon"><i class="fa-solid fa-file-contract"></i></div>
+                    <div class="doc-info">
+                        <h4>Investigation_Agreement.pdf</h4>
+                        <p>425 KB • Jan 15, 2026 • All Cases</p>
+                    </div>
+                    <div class="doc-actions"><button title="Download"><i
+                                class="fa-solid fa-download"></i></button><button title="View"><i
+                                class="fa-solid fa-eye"></i></button></div>
+                </div>
+                <div class="doc-card">
+                    <div class="doc-icon"><i class="fa-solid fa-file-shield"></i></div>
+                    <div class="doc-info">
+                        <h4>NDA_Agreement_Signed.pdf</h4>
+                        <p>180 KB • Jan 15, 2026 • All Cases</p>
+                    </div>
+                    <div class="doc-actions"><button title="Download"><i
+                                class="fa-solid fa-download"></i></button><button title="View"><i
+                                class="fa-solid fa-eye"></i></button></div>
+                </div>
+                <div class="doc-card">
+                    <div class="doc-icon"><i class="fa-solid fa-file-image"></i></div>
+                    <div class="doc-info">
+                        <h4>Digital_Forensics_Evidence.zip</h4>
+                        <p>15.7 MB • Jan 28, 2026 • Case VR-2847-C</p>
+                    </div>
+                    <div class="doc-actions"><button title="Download"><i class="fa-solid fa-download"></i></button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <button class="mobile-sidebar-toggle" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>AOS.init({ duration: 800, once: true });</script>
+    <script src="../assets/js/script.js"></script>
+</body>
+
+</html>

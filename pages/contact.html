@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../assets/images/logo/logo-main.png">
+    <title>VERITAS — Contact Us</title>
+    <meta name="description"
+        content="Get in touch with Veritas. Confidential consultations available 24/7. Reach our team of expert investigators.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .contact-trust-indicators {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 24px;
+            margin-top: 32px;
+        }
+
+        .trust-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            background: var(--accent-gold-soft);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius-pill);
+            font-size: 0.85rem;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: var(--transition-spring);
+        }
+
+        .trust-indicator:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-gold);
+            background: rgba(212, 165, 116, 0.08);
+        }
+
+        .trust-indicator i {
+            color: var(--accent-gold);
+        }
+
+        .urgent-assistance {
+            background: rgba(139, 92, 246, 0.05);
+            border: 1px solid rgba(139, 92, 246, 0.15);
+            border-radius: var(--border-radius-lg);
+            padding: 32px;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .urgent-text h3 {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .urgent-text p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .hotline-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #7C5CFF, #9B7CFF);
+            color: #FFFFFF;
+            border-radius: var(--border-radius-pill);
+            font-weight: 700;
+            text-decoration: none;
+            transition: var(--transition-spring);
+            white-space: nowrap;
+            box-shadow: 0 10px 25px rgba(124, 92, 255, 0.25);
+        }
+
+        .hotline-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(124, 92, 255, 0.35);
+        }
+
+        .contact-info-card {
+            transition: var(--transition-spring);
+        }
+
+        .contact-info-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-gold);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-helper {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .form-label-caps {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .confidentiality-bar {
+            background: var(--bg-secondary);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius-lg);
+            padding: 60px;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .assurance-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .assurance-item i {
+            font-size: 2rem;
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+            transition: var(--transition-spring);
+        }
+
+        .assurance-item:hover i {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .map-section {
+            margin-top: 80px;
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            height: 400px;
+            position: relative;
+            background: var(--bg-secondary);
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(8, 11, 22, 0.4), rgba(8, 11, 22, 0.4)), url('https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&q=80&w=1200&h=400');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .map-pin {
+            width: 60px;
+            height: 60px;
+            background: var(--accent-gradient);
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(-45deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #080B16;
+            font-size: 1.5rem;
+            box-shadow: 0 0 30px var(--accent-gold);
+            animation: pinPulse 2s infinite;
+        }
+
+        .map-pin i {
+            transform: rotate(45deg);
+        }
+
+        @keyframes pinPulse {
+            0% {
+                transform: rotate(-45deg) scale(1);
+            }
+
+            50% {
+                transform: rotate(-45deg) scale(1.1);
+            }
+
+            100% {
+                transform: rotate(-45deg) scale(1);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .urgent-assistance {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .assurance-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="animated-bg"></div>
+    <div class="nav-overlay" id="nav-overlay"></div>
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="../index.html" class="navbar-brand"><img src="../assets/images/logo/logo-main.png"
+                    alt="Veritas Logo" class="brand-logo"> VERITAS</a>
+            <div class="nav-links" id="nav-links">
+                <button class="nav-back mobile-only" id="nav-back"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                <a href="../index.html">Home - 1</a>
+                <a href="home-v2.html">Home - 2</a>
+                <a href="services.html">Services</a>
+                <a href="case-request.html">Request Case</a>
+                <a href="about.html">About</a>
+                <a href="contact.html" class="active">Contact</a>
+                <div class="nav-item-dropdown">
+                    <a href="dashboard.html" class="dropdown-toggle">Dashboard <i
+                            class="fa-solid fa-chevron-down"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="admin-cases.html">Admin</a>
+                        <a href="dashboard.html">User</a>
+                    </div>
+                </div>
+
+                <hr class="mobile-only">
+                <a href="login.html" class="btn btn-outline nav-login-btn mobile-only">Login</a>
+            </div>
+
+            <div class="nav-actions">
+                <a href="login.html" class="btn btn-primary nav-login-btn desktop-only">Login</a>
+
+                <div class="nav-controls">
+                    <button class="rtl-toggle" id="rtl-toggle" aria-label="Toggle RTL">
+                        <i class="fa-solid fa-language"></i>
+                    </button>
+                    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                        <i class="fa-solid fa-sun"></i>
+                    </button>
+                    <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="page-header contact-header">
+        <div class="container">
+            <h1>Contact Us</h1>
+            <p>Reach out confidentially. Our investigative team is available 24/7 for secure consultations.</p>
+
+            <div class="contact-trust-indicators">
+                <div class="trust-indicator">
+                    <i class="fa-solid fa-lock"></i>
+                    <span>Confidential Communication</span>
+                </div>
+                <div class="trust-indicator">
+                    <i class="fa-solid fa-phone-volume"></i>
+                    <span>24/7 Investigator Hotline</span>
+                </div>
+                <div class="trust-indicator">
+                    <i class="fa-solid fa-scale-balanced"></i>
+                    <span>Legally Compliant Consultations</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <!-- Urgent Assistance Block -->
+            <div class="urgent-assistance" data-aos="fade-up">
+                <div class="urgent-text">
+                    <h3>Urgent investigation matter?</h3>
+                    <p>Immediate response for critical cases and emergency field operations.</p>
+                </div>
+                <a href="tel:+18008374827" class="hotline-btn">
+                    <i class="fa-solid fa-phone"></i> +1 (800) VERITAS
+                </a>
+            </div>
+
+            <div class="contact-grid">
+                <div data-aos="fade-right">
+                    <span class="form-label-caps">Confidential Message</span>
+                    <div class="section-header" style="text-align: left; margin-bottom: 32px;">
+                        <h2
+                            style="background: var(--accent-gradient); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-family: var(--font-display); font-size: 2.2rem; margin-bottom: 12px;">
+                            Send Us a Message</h2>
+                        <p style="margin: 0; color: var(--text-secondary);">Direct inquiries are routed through our
+                            secure operations center.</p>
+                    </div>
+                    <form class="contact-form" id="contact-form">
+                        <div class="form-row">
+                            <div class="form-group"><label for="c-name">Full Name *</label><input type="text"
+                                    id="c-name" placeholder="Your name" required></div>
+                            <div class="form-group"><label for="c-email">Email *</label><input type="email" id="c-email"
+                                    placeholder="your@email.com" required></div>
+                        </div>
+                        <div class="form-group"><label for="c-subject">Subject *</label><input type="text"
+                                id="c-subject" placeholder="How can we help?" required></div>
+                        <div class="form-group">
+                            <label for="c-message">Message *</label>
+                            <textarea id="c-message" rows="5" placeholder="Your message..." required></textarea>
+                            <div class="form-helper">
+                                <i class="fa-solid fa-circle-info"></i>
+                                <span>Please avoid sharing highly sensitive documents here. Use the <a
+                                        href="case-request.html"
+                                        style="color: var(--accent-gold); text-decoration: underline;">Case Request</a>
+                                    page for secure evidence submission.</span>
+                            </div>
+                        </div>
+                        <div style="margin-top: 32px;">
+                            <button type="submit" class="btn btn-primary"
+                                style="width: 100%; justify-content: center; min-height: 56px;">
+                                <i class="fa-solid fa-paper-plane"></i> Send Secure Message
+                            </button>
+                            <p
+                                style="text-align: center; color: var(--text-muted); font-size: 0.8rem; margin-top: 12px;">
+                                <i class="fa-solid fa-lock" style="font-size: 0.75rem;"></i> Messages are transmitted
+                                through protected, encrypted channels.
+                            </p>
+                        </div>
+                    </form>
+                </div>
+                <div class="contact-info-cards" data-aos="fade-left">
+                    <span class="form-label-caps">Direct Channels</span>
+                    <div class="contact-info-card">
+                        <div class="contact-info-icon"><i class="fa-solid fa-phone"></i></div>
+                        <div>
+                            <h4>24/7 Global Hotline</h4>
+                            <p>+1 (800) VERITAS<br>+1 (800) 837-4827</p>
+                            <span
+                                style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-top: 4px;">Immediate
+                                response for urgent investigative matters</span>
+                        </div>
+                    </div>
+                    <div class="contact-info-card">
+                        <div class="contact-info-icon"><i class="fa-solid fa-envelope"></i></div>
+                        <div>
+                            <h4>Secure Email</h4>
+                            <p>inquiries@veritas-pi.com<br>cases@veritas-pi.com</p>
+                            <span
+                                style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-top: 4px;">PGP
+                                / Encrypted communication available upon request</span>
+                        </div>
+                    </div>
+                    <div class="contact-info-card">
+                        <div class="contact-info-icon"><i class="fa-solid fa-location-dot"></i></div>
+                        <div>
+                            <h4>Headquarters</h4>
+                            <p>1200 Intelligence Ave, Suite 800<br>Washington, D.C. 20005</p>
+                            <span
+                                style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-top: 4px;">In-person
+                                appointments by prior arrangement only</span>
+                        </div>
+                    </div>
+                    <div class="contact-info-card">
+                        <div class="contact-info-icon"><i class="fa-solid fa-clock"></i></div>
+                        <div>
+                            <h4>Operating Hours</h4>
+                            <p>Office: Mon–Fri, 9:00 AM – 6:00 PM<br><strong>Field Operations: 24/7/365</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Confidentiality Assurance Bar -->
+            <div class="confidentiality-bar" data-aos="fade-up">
+                <div class="section-header" style="margin-bottom: 24px;">
+                    <span class="label">Privacy Guarantee</span>
+                    <h2>Your Inquiry Remains Private</h2>
+                </div>
+                <p style="max-width: 750px; margin: 0 auto; color: var(--text-secondary); line-height: 1.8;">
+                    All communications with Veritas Investigations are treated with strict confidentiality. Information
+                    shared through this page is protected through AES-256 encryption and only accessible to authorized
+                    investigators assigned to your sector.
+                </p>
+                <div class="assurance-grid">
+                    <div class="assurance-item">
+                        <i class="fa-solid fa-user-secret"></i>
+                        <h4>Vetted Access</h4>
+                        <p>Only authorized agents see your data</p>
+                    </div>
+                    <div class="assurance-item">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <h4>Encrypted Transit</h4>
+                        <p>Secured via enterprise SSL protocols</p>
+                    </div>
+                    <div class="assurance-item">
+                        <i class="fa-solid fa-file-contract"></i>
+                        <h4>Legal Secrecy</h4>
+                        <p>Client-investigator privilege maintained</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map Section -->
+            <div class="map-section" data-aos="fade-up">
+                <div class="map-placeholder">
+                    <div class="map-pin">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </div>
+                    <div
+                        style="position: absolute; bottom: 30px; left: 30px; background: var(--bg-card); padding: 20px; border-radius: var(--border-radius); border: 1px solid var(--glass-border); backdrop-filter: blur(10px);">
+                        <h4 style="margin-bottom: 4px; font-family: var(--font-display);">Veritas HQ</h4>
+                        <p style="font-size: 0.8rem; color: var(--text-secondary);">1200 Intelligence Ave, Washington
+                            D.C.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column"><a href="../index.html" class="navbar-brand" style="margin-bottom:8px;"><img
+                            src="../assets/images/logo/logo-main.png" alt="Veritas Logo" class="brand-logo"> VERITAS</a>
+                    <p class="footer-brand-desc">Intelligence Behind the Truth. Premier private investigation agency
+                        delivering confidential, results-driven solutions.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Home - 1</a></li>
+                        <li><a href="home-v2.html">Home - 2</a></li>
+                        <li><a href="case-request.html">Request Case</a></li>
+                        <li><a href="404.html">404 Error</a></li>
+                        <li><a href="coming-soon.html">Coming Soon</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="services.html">Our Services</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="admin-cases.html">Admin Dashboard</a></li>
+                        <li><a href="dashboard.html">User Dashboard</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Security Updates</h4>
+                    <p style="color:var(--text-secondary);font-size:0.9rem;margin-bottom:16px;">Advanced investigative
+                        intelligence delivered with absolute precision and confidentiality.</p>
+                    <form class="newsletter-form" id="newsletter-form"><input type="email"
+                            placeholder="Your email address" required><button type="submit">Subscribe</button></form>
+                    <p
+                        style="color: var(--accent-gold); font-size: 0.75rem; margin-top: 15px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">
+                        Trusted by Global Intelligence Professionals</p>
+                </div>
+            </div>
+            <div class="footer-bottom"><span>&copy; 2026 Veritas Investigations.</span>
+                <div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a><a
+                        href="#">Confidentiality</a></div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>AOS.init({ duration: 800, once: true, offset: 100 });</script>
+    <script src="../assets/js/script.js"></script>
+</body>
+
+</html>

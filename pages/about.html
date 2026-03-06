@@ -1,0 +1,838 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="../assets/images/logo/logo-main.png" />
+  <title>VERITAS — About Our Agency</title>
+  <meta name="description"
+    content="Learn about Veritas, a premier private investigation agency with 15+ years of experience delivering confidential, technology-driven investigative solutions." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <style>
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 1024px) {
+      .team-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+      }
+
+      .team-card {
+        padding: 24px 15px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+
+      .team-card {
+        padding: 24px 15px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .team-card {
+      background: var(--bg-card);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--border-radius-lg);
+      padding: 36px;
+      text-align: center;
+      transition: var(--transition);
+    }
+
+    .team-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--accent-gold);
+    }
+
+    .team-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      background: var(--accent-gold-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-gold);
+      font-size: 2rem;
+      font-weight: 700;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+    }
+
+    .team-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .team-card .role {
+      color: var(--accent-gold);
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .team-card p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 28px;
+    }
+
+    @media (max-width: 480px) {
+      .values-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .container {
+        padding: 0 25px;
+      }
+
+      .section-header h2 {
+        font-size: 1.8rem;
+      }
+    }
+
+    .value-card {
+      padding: 36px;
+      background: var(--bg-card);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--border-radius-lg);
+      transition: var(--transition);
+    }
+
+    .value-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-gold);
+    }
+
+    .value-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      background: var(--accent-gold-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-gold);
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+    }
+
+    .value-card h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .value-card p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .credentials-list {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      gap: 20px;
+      margin-top: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .credentials-list {
+        flex-wrap: wrap;
+      }
+    }
+
+    .credential {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--border-radius-pill);
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      white-space: nowrap;
+    }
+
+    .credential i {
+      color: var(--accent-gold);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--glass-border);
+      padding: 50px 20px;
+      border-radius: var(--border-radius-lg);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      transition: var(--transition-spring);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--accent-gold);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .stat-number {
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 800;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      white-space: nowrap;
+      margin-bottom: 12px;
+      line-height: 1;
+      display: block;
+    }
+
+    .stat-label {
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 1024px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .stat-card {
+        padding: 40px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="animated-bg"></div>
+  <div class="nav-overlay" id="nav-overlay"></div>
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="../index.html" class="navbar-brand"><img src="../assets/images/logo/logo-main.png" alt="Veritas Logo"
+          class="brand-logo" />
+        VERITAS</a>
+      <div class="nav-links" id="nav-links">
+        <button class="nav-back mobile-only" id="nav-back"><i class="fa-solid fa-arrow-left"></i> Back</button>
+        <a href="../index.html">Home - 1</a>
+        <a href="home-v2.html">Home - 2</a>
+        <a href="services.html">Services</a>
+        <a href="case-request.html">Request Case</a>
+        <a href="about.html" class="active">About</a>
+        <a href="contact.html">Contact</a>
+        <div class="nav-item-dropdown">
+          <a href="dashboard.html" class="dropdown-toggle">Dashboard <i class="fa-solid fa-chevron-down"></i></a>
+          <div class="dropdown-menu">
+            <a href="admin-cases.html">Admin</a>
+            <a href="dashboard.html">User</a>
+          </div>
+        </div>
+
+        <hr class="mobile-only">
+        <a href="login.html" class="btn btn-outline nav-login-btn mobile-only">Login</a>
+      </div>
+
+      <div class="nav-actions">
+        <a href="login.html" class="btn btn-primary nav-login-btn desktop-only">Login</a>
+
+        <div class="nav-controls">
+          <button class="rtl-toggle" id="rtl-toggle" aria-label="Toggle RTL">
+            <i class="fa-solid fa-language"></i>
+          </button>
+          <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+            <i class="fa-solid fa-sun"></i>
+          </button>
+          <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <section class="page-header about-header">
+    <div class="container">
+      <h1>About Veritas</h1>
+      <p>
+        Trusted by corporations, legal professionals, and private clients for
+        over 15 years. Our commitment to truth is unwavering.
+      </p>
+    </div>
+  </section>
+
+  <!-- Story Section -->
+  <section>
+    <div class="container">
+      <div class="about-content" data-aos="fade-up">
+        <div class="about-text">
+          <span class="label" style="
+                display: inline-block;
+                padding: 6px 20px;
+                background: var(--accent-gold-soft);
+                color: var(--accent-gold);
+                border-radius: var(--border-radius-pill);
+                font-size: 0.8rem;
+                font-weight: 600;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                margin-bottom: 16px;
+              ">Our Story</span>
+          <h2>Founded on Integrity, Driven by Results</h2>
+          <p>
+            Veritas was established in 2011 by a team of former law
+            enforcement professionals and intelligence analysts who saw the
+            need for a private investigation agency that combined traditional
+            investigative techniques with modern technology.
+          </p>
+          <p>
+            Today, we are one of the most trusted names in private
+            investigation, with a team of over 50 skilled investigators,
+            digital forensics experts, and intelligence analysts operating
+            across the globe.
+          </p>
+          <p>
+            Our name — Veritas — is Latin for "truth." It embodies our
+            singular mission: to uncover the truth, no matter how deeply it's
+            hidden.
+          </p>
+          <div class="credentials-list">
+            <div class="credential">
+              <i class="fa-solid fa-certificate"></i> Licensed & Bonded
+            </div>
+            <div class="credential">
+              <i class="fa-solid fa-shield-halved"></i> ISO 27001 Certified
+            </div>
+            <div class="credential">
+              <i class="fa-solid fa-award"></i> ASIS International Member
+            </div>
+          </div>
+        </div>
+        <div class="about-image" data-aos="fade-left">
+          <img src="../assets/images/about/Founder-img.png" alt="Veritas Agency Founder" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Values -->
+  <section style="
+        background: radial-gradient(
+          circle at center,
+          var(--accent-gold-soft),
+          transparent
+        );
+        border-top: 1px solid var(--glass-border);
+      ">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <span class="label">Our Values</span>
+        <h2>What We Stand For</h2>
+      </div>
+      <div class="values-grid">
+        <div class="value-card" data-aos="fade-up">
+          <div class="value-icon"><i class="fa-solid fa-eye-slash"></i></div>
+          <h3>Absolute Discretion</h3>
+          <p>
+            Every case is handled with the utmost confidentiality. We operate
+            under strict non-disclosure protocols to protect our clients.
+          </p>
+        </div>
+        <div class="value-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="value-icon">
+            <i class="fa-solid fa-shield-halved"></i>
+          </div>
+          <h3>Ethical Practice</h3>
+          <p>
+            We conduct all investigations within the bounds of the law,
+            ensuring evidence integrity and ethical compliance at every step.
+          </p>
+        </div>
+        <div class="value-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="value-icon"><i class="fa-solid fa-bullseye"></i></div>
+          <h3>Results-Driven</h3>
+          <p>
+            We are laser-focused on delivering actionable intelligence and
+            documented evidence that stands up in any arena.
+          </p>
+        </div>
+        <div class="value-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="value-icon">
+            <i class="fa-solid fa-network-wired"></i>
+          </div>
+          <h3>Tech Innovation</h3>
+          <p>
+            Continuous investment in cutting-edge surveillance, forensics, and
+            analytics technology keeps us ahead of the curve.
+          </p>
+        </div>
+        <div class="value-card" data-aos="fade-up" data-aos-delay="400">
+          <div class="value-icon">
+            <i class="fa-solid fa-file-shield"></i>
+          </div>
+          <h3>Evidence Integrity</h3>
+          <p>
+            All findings are documented and preserved through strict
+            chain-of-custody procedures to maintain authenticity and legal
+            admissibility.
+          </p>
+        </div>
+        <div class="value-card" data-aos="fade-up" data-aos-delay="500">
+          <div class="value-icon">
+            <i class="fa-solid fa-handshake-angle"></i>
+          </div>
+          <h3>Client Partnership</h3>
+          <p>
+            We work closely with clients throughout every investigation,
+            ensuring transparency, strategic insight, and actionable outcomes.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Operational Capabilities -->
+  <section style="
+        background: var(--bg-primary);
+        border-top: 1px solid var(--glass-border);
+      ">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <span class="label">Our Capabilities</span>
+        <h2>Our Operational Capabilities</h2>
+      </div>
+      <div class="values-grid">
+        <div class="value-card" data-aos="fade-up">
+          <div class="value-icon">
+            <i class="fa-solid fa-laptop-code"></i>
+          </div>
+          <h3>Digital Intelligence</h3>
+          <p>
+            Advanced forensic analysis of devices, networks, and digital
+            communications.
+          </p>
+        </div>
+        <div class="value-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="value-icon"><i class="fa-solid fa-video"></i></div>
+          <h3>Field Surveillance</h3>
+          <p>
+            Professional covert observation and monitoring by trained
+            investigators.
+          </p>
+        </div>
+        <div class="value-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="value-icon">
+            <i class="fa-solid fa-diagram-project"></i>
+          </div>
+          <h3>Data Analysis</h3>
+          <p>
+            Cross-referencing intelligence sources to uncover hidden patterns.
+          </p>
+        </div>
+        <div class="value-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="value-icon">
+            <i class="fa-solid fa-folder-closed"></i>
+          </div>
+          <h3>Evidence Documentation</h3>
+          <p>
+            Secure documentation and reporting suitable for legal proceedings.
+          </p>
+        </div>
+        <div class="value-card" data-aos="fade-up" data-aos-delay="400">
+          <div class="value-icon"><i class="fa-solid fa-globe"></i></div>
+          <h3>Global Intelligence Network</h3>
+          <p>
+            Access to international investigative databases and intelligence
+            resources.
+          </p>
+        </div>
+        <div class="value-card" data-aos="fade-up" data-aos-delay="500">
+          <div class="value-icon"><i class="fa-solid fa-lock"></i></div>
+          <h3>Secure Client Portal</h3>
+          <p>
+            Encrypted communication and document sharing for confidential
+            cases.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Leadership Team -->
+  <section style="
+        background: var(--bg-primary);
+        border-top: 1px solid var(--glass-border);
+      ">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <span class="label">Our Team</span>
+        <h2>Our Expert Team</h2>
+        <p>
+          Led by professionals with decades of experience in law enforcement,
+          intelligence, and corporate security.
+        </p>
+      </div>
+      <div class="team-grid">
+        <div class="team-card" data-aos="fade-up">
+          <div class="team-avatar">RH</div>
+          <h3>Richard Hayes</h3>
+          <div class="role">Founder & CEO</div>
+          <p style="
+                margin-bottom: 15px;
+                font-weight: 500;
+                color: var(--text-primary);
+              ">
+            Former FBI Special Agent
+          </p>
+          <p style="margin-bottom: 5px; font-size: 0.85rem">
+            <i class="fa-solid fa-crosshairs" style="color: var(--accent-gold)"></i>
+            <strong>Focus:</strong> Corporate Fraud
+          </p>
+          <p style="margin-bottom: 20px; font-size: 0.85rem">
+            <i class="fa-solid fa-business-time" style="color: var(--accent-gold)"></i>
+            <strong>Exp:</strong> 20+ years
+          </p>
+          <div style="display: flex; justify-content: center; gap: 15px">
+            <a href="#" style="
+                  color: var(--text-secondary);
+                  transition: var(--transition);
+                "><i class="fa-brands fa-linkedin"></i></a>
+            <a href="#" style="
+                  color: var(--text-secondary);
+                  transition: var(--transition);
+                "><i class="fa-solid fa-envelope"></i></a>
+          </div>
+        </div>
+        <div class="team-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="team-avatar">SC</div>
+          <h3>Sarah Chen</h3>
+          <div class="role">Director of Operations</div>
+          <p style="
+                margin-bottom: 15px;
+                font-weight: 500;
+                color: var(--text-primary);
+              ">
+            Senior Intel Analyst
+          </p>
+          <p style="margin-bottom: 5px; font-size: 0.85rem">
+            <i class="fa-solid fa-crosshairs" style="color: var(--accent-gold)"></i>
+            <strong>Focus:</strong> Risk Management
+          </p>
+          <p style="margin-bottom: 20px; font-size: 0.85rem">
+            <i class="fa-solid fa-business-time" style="color: var(--accent-gold)"></i>
+            <strong>Exp:</strong> 15+ years
+          </p>
+          <div style="display: flex; justify-content: center; gap: 15px">
+            <a href="#" style="
+                  color: var(--text-secondary);
+                  transition: var(--transition);
+                "><i class="fa-brands fa-linkedin"></i></a>
+            <a href="#" style="
+                  color: var(--text-secondary);
+                  transition: var(--transition);
+                "><i class="fa-solid fa-envelope"></i></a>
+          </div>
+        </div>
+        <div class="team-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="team-avatar">MR</div>
+          <h3>Marcus Rivera</h3>
+          <div class="role">Head of Digital Forensics</div>
+          <p style="
+                margin-bottom: 15px;
+                font-weight: 500;
+                color: var(--text-primary);
+              ">
+            Certified Cyber Examiner
+          </p>
+          <p style="margin-bottom: 5px; font-size: 0.85rem">
+            <i class="fa-solid fa-crosshairs" style="color: var(--accent-gold)"></i>
+            <strong>Focus:</strong> Data Recovery
+          </p>
+          <p style="margin-bottom: 20px; font-size: 0.85rem">
+            <i class="fa-solid fa-business-time" style="color: var(--accent-gold)"></i>
+            <strong>Exp:</strong> 12+ years
+          </p>
+          <div style="display: flex; justify-content: center; gap: 15px">
+            <a href="#" style="
+                  color: var(--text-secondary);
+                  transition: var(--transition);
+                "><i class="fa-brands fa-linkedin"></i></a>
+            <a href="#" style="
+                  color: var(--text-secondary);
+                  transition: var(--transition);
+                "><i class="fa-solid fa-envelope"></i></a>
+          </div>
+        </div>
+        <div class="team-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="team-avatar">EV</div>
+          <h3>Elena Volkov</h3>
+          <div class="role">Chief Legal Counsel</div>
+          <p style="
+                margin-bottom: 15px;
+                font-weight: 500;
+                color: var(--text-primary);
+              ">
+            Juris Doctor (JD)
+          </p>
+          <p style="margin-bottom: 5px; font-size: 0.85rem">
+            <i class="fa-solid fa-crosshairs" style="color: var(--accent-gold)"></i>
+            <strong>Focus:</strong> Evidence Law
+          </p>
+          <p style="margin-bottom: 20px; font-size: 0.85rem">
+            <i class="fa-solid fa-business-time" style="color: var(--accent-gold)"></i>
+            <strong>Exp:</strong> 18+ years
+          </p>
+          <div style="display: flex; justify-content: center; gap: 15px">
+            <a href="#" style="
+                  color: var(--text-secondary);
+                  transition: var(--transition);
+                "><i class="fa-brands fa-linkedin"></i></a>
+            <a href="#" style="
+                  color: var(--text-secondary);
+                  transition: var(--transition);
+                "><i class="fa-solid fa-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats-section" style="
+        background: radial-gradient(
+          circle at center,
+          var(--accent-gold-soft),
+          transparent
+        );
+        border-top: 1px solid var(--glass-border);
+        position: relative;
+      ">
+    <!-- Adding a subtle glow effect -->
+    <div style="
+          position: absolute;
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 60%;
+          height: 1px;
+          background: var(--accent-gradient);
+          opacity: 0.5;
+        "></div>
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-card" data-aos="fade-up">
+          <div class="stat-number">2,500+</div>
+          <div class="stat-label">Cases Resolved</div>
+        </div>
+        <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="stat-number">98%</div>
+          <div class="stat-label">Success Rate</div>
+        </div>
+        <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="stat-number">15+</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="stat-number">50+</div>
+          <div class="stat-label">Investigators</div>
+        </div>
+      </div>
+  </section>
+
+  <!-- Enhanced Consultation CTA -->
+  <section class="consultation-cta" style="
+        border-top: 1px solid var(--glass-border);
+        background: var(--bg-primary);
+        padding: 100px 0;
+      ">
+    <div class="container">
+      <div class="consultation-box" data-aos="zoom-in" style="
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            padding: 60px 40px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--glass-shadow);
+            text-align: center;
+          ">
+        <h2 style="
+              font-size: clamp(2rem, 4vw, 2.5rem);
+              margin-bottom: 20px;
+              font-family: var(--font-display);
+              color: var(--text-primary);
+            ">
+          Begin a Confidential Investigation
+        </h2>
+        <p style="
+              color: var(--text-secondary);
+              font-size: 1.15rem;
+              margin-bottom: 30px;
+              line-height: 1.6;
+            ">
+          Every inquiry is handled with absolute discretion. Speak directly
+          with our investigators to discuss your situation.
+        </p>
+
+        <div style="
+              display: flex;
+              justify-content: center;
+              flex-wrap: wrap;
+              gap: 30px;
+              margin-bottom: 40px;
+            ">
+          <div style="
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                color: var(--text-primary);
+                font-weight: 500;
+              ">
+            <i class="fa-solid fa-lock" style="color: var(--accent-gold); font-size: 1.2rem"></i>
+            Secure Communication
+          </div>
+          <div style="
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                color: var(--text-primary);
+                font-weight: 500;
+              ">
+            <i class="fa-solid fa-scale-balanced" style="color: var(--accent-gold); font-size: 1.2rem"></i>
+            Legally Compliant Investigations
+          </div>
+          <div style="
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                color: var(--text-primary);
+                font-weight: 500;
+              ">
+            <i class="fa-solid fa-user-tie" style="color: var(--accent-gold); font-size: 1.2rem"></i>
+            Experienced Investigators
+          </div>
+        </div>
+
+        <div class="consultation-actions" style="
+              display: flex;
+              justify-content: center;
+              gap: 20px;
+              flex-wrap: wrap;
+            ">
+          <a href="case-request.html" class="btn btn-primary"><i class="fa-solid fa-file-shield"></i> Start Secure
+            Case</a>
+          <a href="contact.html" class="btn btn-outline"><i class="fa-solid fa-calendar"></i> Schedule Consultation</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-column">
+          <a href="../index.html" class="navbar-brand" style="margin-bottom: 8px"><img
+              src="../assets/images/logo/logo-main.png" alt="Veritas Logo" class="brand-logo" />
+            VERITAS</a>
+          <p class="footer-brand-desc">Intelligence Behind the Truth. Premier private investigation agency delivering
+            confidential, results-driven solutions.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="../index.html">Home - 1</a></li>
+            <li><a href="home-v2.html">Home - 2</a></li>
+            <li><a href="case-request.html">Request Case</a></li>
+            <li><a href="404.html">404 Error</a></li>
+            <li><a href="coming-soon.html">Coming Soon</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="services.html">Our Services</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="admin-cases.html">Admin Dashboard</a></li>
+            <li><a href="dashboard.html">User Dashboard</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Security Updates</h4>
+          <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 16px;">Advanced investigative
+            intelligence delivered with absolute precision and confidentiality.</p>
+          <form class="newsletter-form" id="newsletter-form">
+            <input type="email" placeholder="Your email address" required /><button type="submit">
+              Subscribe
+            </button>
+          </form>
+          <p
+            style="color: var(--accent-gold); font-size: 0.75rem; margin-top: 15px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">
+            Trusted by Global Intelligence Professionals</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Veritas Investigations.</span>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy</a><a href="#">Terms</a><a href="#">Confidentiality</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    AOS.init({ duration: 800, once: true, offset: 100 });
+  </script>
+  <script src="../assets/js/script.js"></script>
+</body>
+
+</html>
