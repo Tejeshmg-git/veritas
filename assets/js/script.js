@@ -20,18 +20,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ---- Theme Toggle ----
 function initThemeToggle() {
-    const btn = document.getElementById('theme-toggle');
-    if (!btn) return;
+    const btns = document.querySelectorAll('.theme-toggle');
+    if (!btns.length) return;
     const saved = localStorage.getItem('veritas-theme') || 'dark';
     document.documentElement.setAttribute('data-theme', saved);
-    updateThemeIcon(btn, saved);
+    
+    btns.forEach(btn => updateThemeIcon(btn, saved));
 
-    btn.addEventListener('click', () => {
-        const current = document.documentElement.getAttribute('data-theme');
-        const next = current === 'dark' ? 'light' : 'dark';
-        document.documentElement.setAttribute('data-theme', next);
-        localStorage.setItem('veritas-theme', next);
-        updateThemeIcon(btn, next);
+    btns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const current = document.documentElement.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('veritas-theme', next);
+            btns.forEach(b => updateThemeIcon(b, next));
+        });
     });
 }
 
