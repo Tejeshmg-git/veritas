@@ -31,6 +31,8 @@
             border-radius: var(--border-radius-lg);
             overflow: hidden;
             transition: var(--transition);
+            display: flex;
+            flex-direction: column;
         }
 
         .case-study-card:hover {
@@ -40,6 +42,9 @@
 
         .case-study-content {
             padding: 28px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
         }
 
         .case-study-tag {
@@ -75,7 +80,8 @@
             gap: 20px;
             color: var(--text-muted);
             font-size: 0.82rem;
-            margin-top: 20px;
+            margin-top: auto;
+            padding-top: 20px;
         }
 
         .case-study-meta span {
@@ -613,7 +619,7 @@
 
                 <div class="nav-controls">
                     <button class="rtl-toggle" id="rtl-toggle" aria-label="Toggle RTL">
-                        <i class="fa-solid fa-language"></i>
+                        <i class="fa-solid fa-right-left"></i>
                     </button>
                     <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
                         <i class="fa-solid fa-sun"></i>

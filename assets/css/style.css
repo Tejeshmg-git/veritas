@@ -898,6 +898,13 @@ section {
         transform: none !important;
         left: auto !important;
         box-shadow: -20px 0 60px rgba(0, 0, 0, 0.5);
+        overflow-y: auto;
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+    }
+
+    .nav-links::-webkit-scrollbar {
+        display: none; /* Chrome, Safari and Opera */
     }
 
     .nav-links.active {
@@ -2224,7 +2231,13 @@ i:not(.btn i):not(.nav-icon i) {
     top: var(--navbar-height);
     bottom: 0;
     overflow-y: auto;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
     z-index: 100;
+}
+
+.dashboard-sidebar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
 }
 
 .sidebar-menu {
@@ -2556,19 +2569,28 @@ i:not(.btn i):not(.nav-icon i) {
     margin-bottom: 40px;
 }
 
-.login-header .brand-logo {
-    width: 64px;
-    height: auto;
+.login-header .brand-name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
     margin-bottom: 24px;
+    text-decoration: none;
+}
+
+.login-header .brand-logo {
+    width: 48px;
+    height: auto;
+    margin-bottom: 0;
     filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.3));
 }
 
 .login-header h1 {
     font-family: var(--font-display);
-    font-size: 3.2rem;
-    letter-spacing: 5px;
+    font-size: 2.8rem;
+    letter-spacing: 4px;
     color: var(--text-primary);
-    margin-bottom: 8px;
+    margin-bottom: 0;
     text-transform: uppercase;
     background: var(--accent-gradient);
     -webkit-background-clip: text;
@@ -3721,6 +3743,22 @@ i:not(.btn i):not(.nav-icon i) {
         font-size: 0.95rem;
     }
 
+    /* Newsletter Form Fix (#Mobile Footer Overflow) */
+    .newsletter-form {
+        flex-direction: column !important;
+        gap: 12px !important;
+    }
+
+    .newsletter-form input,
+    .newsletter-form button {
+        width: 100% !important;
+        flex: none !important;
+    }
+
+    .newsletter-form button {
+        padding: 14px 24px !important;
+    }
+
     /* CTA Section Responsiveness */
     .cta-box {
         padding: 60px 20px;
@@ -4096,6 +4134,12 @@ i:not(.btn i):not(.nav-icon i) {
         z-index: 1100;
         box-shadow: 20px 0 60px rgba(0, 0, 0, 0.6);
         overflow-y: auto;
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+    }
+
+    .dashboard-sidebar::-webkit-scrollbar {
+        display: none; /* Chrome, Safari and Opera */
     }
 
     .dashboard-sidebar.active {

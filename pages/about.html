@@ -61,8 +61,8 @@
     }
 
     .team-avatar {
-      width: 80px;
-      height: 80px;
+      width: 100px; /* Increased for better visibility */
+      height: 100px;
       border-radius: 50%;
       margin: 0 auto 20px;
       background: var(--accent-gold-soft);
@@ -70,9 +70,15 @@
       align-items: center;
       justify-content: center;
       color: var(--accent-gold);
-      font-size: 2rem;
-      font-weight: 700;
-      border: 1px solid rgba(212, 175, 55, 0.2);
+      overflow: hidden; /* Ensure image is clipped to circle */
+      border: 2px solid var(--accent-gold);
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+    }
+
+    .team-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .team-card h3 {
@@ -281,7 +287,7 @@
 
         <div class="nav-controls">
           <button class="rtl-toggle" id="rtl-toggle" aria-label="Toggle RTL">
-            <i class="fa-solid fa-language"></i>
+            <i class="fa-solid fa-right-left"></i>
           </button>
           <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
             <i class="fa-solid fa-sun"></i>
@@ -517,7 +523,7 @@
       </div>
       <div class="team-grid">
         <div class="team-card" data-aos="fade-up">
-          <div class="team-avatar">RH</div>
+          <div class="team-avatar"><img src="../assets/images/team/richard-hayes.png" alt="Richard Hayes"></div>
           <h3>Richard Hayes</h3>
           <div class="role">Founder & CEO</div>
           <p style="
@@ -547,7 +553,7 @@
           </div>
         </div>
         <div class="team-card" data-aos="fade-up" data-aos-delay="100">
-          <div class="team-avatar">SC</div>
+          <div class="team-avatar"><img src="../assets/images/team/sarah-chen.png" alt="Sarah Chen"></div>
           <h3>Sarah Chen</h3>
           <div class="role">Director of Operations</div>
           <p style="
@@ -577,7 +583,7 @@
           </div>
         </div>
         <div class="team-card" data-aos="fade-up" data-aos-delay="200">
-          <div class="team-avatar">MR</div>
+          <div class="team-avatar"><img src="../assets/images/team/marcus-rivera.png" alt="Marcus Rivera"></div>
           <h3>Marcus Rivera</h3>
           <div class="role">Head of Digital Forensics</div>
           <p style="
@@ -607,7 +613,7 @@
           </div>
         </div>
         <div class="team-card" data-aos="fade-up" data-aos-delay="300">
-          <div class="team-avatar">EV</div>
+          <div class="team-avatar"><img src="../assets/images/team/elena-volkov.png" alt="Elena Volkov"></div>
           <h3>Elena Volkov</h3>
           <div class="role">Chief Legal Counsel</div>
           <p style="
