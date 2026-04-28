@@ -20,10 +20,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ---- Theme Toggle ----
 function initThemeToggle() {
-    const btns = document.querySelectorAll('.theme-toggle');
-    if (!btns.length) return;
+    // 1. Always apply the saved theme first
     const saved = localStorage.getItem('veritas-theme') || 'dark';
     document.documentElement.setAttribute('data-theme', saved);
+    
+    // 2. Then handle toggle buttons if they exist
+    const btns = document.querySelectorAll('.theme-toggle');
+    if (!btns.length) return;
     
     btns.forEach(btn => updateThemeIcon(btn, saved));
 

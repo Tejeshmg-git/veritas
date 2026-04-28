@@ -41,13 +41,11 @@
             align-items: center;
             gap: 10px;
             padding: 10px 20px;
-            background: rgba(212, 175, 55, 0.12);
-            /* Hardcode to dark theme's --accent-gold-soft for contrast */
-            border: 1px solid rgba(212, 175, 55, 0.15);
-            /* Hardcode to dark theme's --glass-border */
+            background: var(--accent-gold-soft);
+            border: 1px solid var(--glass-border);
             border-radius: var(--border-radius-pill);
             font-size: 0.85rem;
-            color: #F3F2F7;
+            color: #FFFFFF;
             font-weight: 500;
             transition: var(--transition-spring);
             cursor: default;
@@ -156,8 +154,8 @@
         .progress-step.active .progress-dot {
             background: var(--accent-gold);
             border-color: var(--accent-gold);
-            color: #080B16;
-            box-shadow: 0 0 15px rgba(212, 165, 116, 0.3);
+            color: #000000;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
         }
 
         .progress-label {
@@ -175,8 +173,8 @@
         .portal-prompt {
             text-align: center;
             padding: 24px;
-            background: rgba(139, 92, 246, 0.05);
-            border: 1px solid rgba(139, 92, 246, 0.1);
+            background: var(--accent-gold-soft);
+            border: 1px solid var(--glass-border);
             border-radius: var(--border-radius-lg);
             margin-bottom: 40px;
             max-width: 900px;
